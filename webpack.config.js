@@ -1,4 +1,6 @@
-/* global module, __dirname */
+/* global __dirname, module, require */
+
+const webpack = require('webpack');
 
 module.exports = {
   devServer: {
@@ -7,6 +9,13 @@ module.exports = {
   },
 
   mode: 'development',
+
+  plugins: [
+    new webpack.SourceMapDevToolPlugin({
+      filename: null, // inline sourcemap
+      test: /\.js($|\?)/i // case-insensitive match for js files
+    })
+  ],
     
   entry: './src/index.jsx',
 

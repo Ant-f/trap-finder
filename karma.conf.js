@@ -21,6 +21,7 @@ module.exports = function(config) {
 
     webpack: {
       module: webpackConfig.module,
+      plugins: webpackConfig.plugins,
       resolve: webpackConfig.resolve
     },
 
