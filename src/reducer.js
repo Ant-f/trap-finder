@@ -1,7 +1,7 @@
-import BoardGenerator from './helpers/board-generator';
+import generator from './helpers/board-generator';
 
 const defaultState = {
-  board: new BoardGenerator().generateBoard(9, 9)
+  board: generator.generateBoard(9, 9)
 };
 
 export default (state = defaultState, action) => {

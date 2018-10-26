@@ -1,7 +1,7 @@
 /* global describe, it, require */
 
 import { expect } from 'chai';
-import BoardGenerator from '../../src/helpers/board-generator';
+import generator from '../../src/helpers/board-generator';
 
 describe('trap location generator', function() {
   it('returns a correct sized board', function() {
@@ -13,7 +13,6 @@ describe('trap location generator', function() {
 
     // Act
 
-    const generator = new BoardGenerator();
     const board = generator.generateBoard(width, height, 0);
 
     // Assert
@@ -32,8 +31,8 @@ describe('trap location generator', function() {
     const generatorModule = require('inject-loader!../../src/helpers/board-generator');
     const returnValues = [0, 1, 2, 3];
 
-    const BoardGeneratorWithInjection = generatorModule({
-      './random-number-generator': class {
+    const generatorWithInjection = generatorModule({
+      './random-number-generator': {
         getRandomInt() {
           return returnValues.shift();
         }
@@ -45,8 +44,7 @@ describe('trap location generator', function() {
 
     // Act
 
-    const generator = new BoardGeneratorWithInjection();
-    const board = generator.generateBoard(width, height, 2);
+    const board = generatorWithInjection.generateBoard(width, height, 2);
 
     // Assert
 
@@ -70,8 +68,8 @@ describe('trap location generator', function() {
     const generatorModule = require('inject-loader!../../src/helpers/board-generator');
     const returnValues = [1, 1, 1, 1, 3, 2];
 
-    const BoardGeneratorWithInjection = generatorModule({
-      './random-number-generator': class {
+    const generatorWithInjection = generatorModule({
+      './random-number-generator': {
         getRandomInt() {
           return returnValues.shift();
         }
@@ -83,8 +81,7 @@ describe('trap location generator', function() {
 
     // Act
 
-    const generator = new BoardGeneratorWithInjection();
-    const board = generator.generateBoard(width, height, trapCount);
+    const board = generatorWithInjection.generateBoard(width, height, trapCount);
 
     // Assert
     

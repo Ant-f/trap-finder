@@ -1,19 +1,18 @@
-import rng from './random-number-generator';
+import { getRandomInt } from './random-number-generator';
 
-class BoardGenerator {
+const boardGenerator = {
   generateBoard(width, height, trapCount) {
     const traps = [];
-    const random = new rng();
     
     while (traps.length < trapCount) {
-      const x = random.getRandomInt(width);
-      const y = random.getRandomInt(height);
+      const x = getRandomInt(width);
+      const y = getRandomInt(height);
 
       const exists = traps.findIndex(point =>
         point.x === x && point.y === y) > -1;
 
       if (!exists) {
-        traps.push({x, y});
+        traps.push({ x, y });
       }
     }
 
@@ -34,6 +33,6 @@ class BoardGenerator {
 
     return board;
   }
-}
+};
 
-export default BoardGenerator;
+export default boardGenerator;
