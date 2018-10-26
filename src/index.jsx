@@ -1,11 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import reducer from './reducer';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-
-const reducer = (state = {}) => {
-  return state;
-};
 
 const store = createStore(reducer);
 
