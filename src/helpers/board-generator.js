@@ -29,6 +29,7 @@ const createBoard = (width, height, traps) => {
         point.x === x && point.y === y) > -1;
       
       board[x][y] = {
+        adjacentTrapCount: 0,
         isTrap: isTrapLocation
       };
     }
@@ -37,10 +38,38 @@ const createBoard = (width, height, traps) => {
   return board;
 };
 
+const setAdjacentTrapCount = (traps, board) => {
+  const width = board.length;
+  const height = board[0].length;
+
+  traps.forEach(({ x, y }) => {
+    const surroundingPoints = [
+      { x: x - 1, y: y - 1 },
+      { x, y: y - 1 },
+      { x: x + 1, y: y - 1 },
+      { x: x - 1, y },
+      { x: x + 1, y },
+      { x: x - 1, y: y + 1 },
+      { x, y: y + 1 },
+      { x: x + 1, y: y + 1 }
+    ];
+
+    surroundingPoints
+      .filter(point => point.x > -1 &&
+        point.x < width &&
+        point.y > -1 &&
+        point.y < height)
+      .forEach(point => {
+        board[point.x][point.y].adjacentTrapCount++;
+      });
+  });
+};
+
 const boardGenerator = {
   generateBoard(width, height, trapCount) {
     const traps = createTraps(width, height, trapCount);
     const board = createBoard(width, height, traps);
+    setAdjacentTrapCount(traps, board);
     return board;
   }
 };
