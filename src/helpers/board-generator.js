@@ -6,12 +6,15 @@ class BoardGenerator {
     const random = new rng();
     
     while (traps.length < trapCount) {
-      const point = {
-        x: random.getRandomInt(width),
-        y: random.getRandomInt(height)
-      };
+      const x = random.getRandomInt(width);
+      const y = random.getRandomInt(height);
 
-      traps.push(point);
+      const exists = traps.findIndex(point =>
+        point.x === x && point.y === y) > -1;
+
+      if (!exists) {
+        traps.push({x, y});
+      }
     }
 
     const board = [];
