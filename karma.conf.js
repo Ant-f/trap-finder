@@ -10,13 +10,11 @@ module.exports = function(config) {
     
     files: [
       // each file acts as entry point for the webpack configuration 
-      { pattern: 'test/**/*.spec.js' },
-      { pattern: 'test/**/*.spec.jsx' }
+      { pattern: 'test/**/*.spec.js' }
     ],
 
     preprocessors: {
-      '**/*.js': ['webpack'],
-      '**/*.jsx': ['webpack']
+      '**/*.js': ['webpack']
     },
 
     webpack: {
