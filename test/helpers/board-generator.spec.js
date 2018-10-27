@@ -3,8 +3,23 @@
 import { expect } from 'chai';
 import generator from '../../src/helpers/board-generator';
 
-describe('Board generator', function() {
-  it('returns a correct sized board', function() {
+const getBoardGenerator = (fixedRandomNumberSequence) => {
+  const generatorModule = require('inject-loader!../../src/helpers/board-generator');
+  const returnValues = fixedRandomNumberSequence;
+
+  const generatorWithInjection = generatorModule({
+    './random-number-generator': {
+      getRandomInt() {
+        return returnValues.shift();
+      }
+    }
+  }).default;
+
+  return generatorWithInjection;
+};
+
+describe('Board generator', function () {
+  it('returns a correct sized board', function () {
 
     // Arrange
 
@@ -24,22 +39,7 @@ describe('Board generator', function() {
     });
   });
 
-  const getBoardGenerator = (fixedRandomNumberSequence) => {
-    const generatorModule = require('inject-loader!../../src/helpers/board-generator');
-    const returnValues = fixedRandomNumberSequence;
-
-    const generatorWithInjection = generatorModule({
-      './random-number-generator': {
-        getRandomInt() {
-          return returnValues.shift();
-        }
-      }
-    }).default;
-
-    return generatorWithInjection;
-  };
-
-  it('sets traps in the correct place', function() {
+  it('sets traps in the correct place', function () {
 
     // Arrange
     
@@ -64,7 +64,7 @@ describe('Board generator', function() {
     });
   });
 
-  it('regenerates already existing trap locations', function() {
+  it('regenerates already existing trap locations', function () {
 
     // Arrange
     
@@ -86,7 +86,7 @@ describe('Board generator', function() {
     expect(board[3][2].isTrap).to.be.true;
   });
 
-  it('sets adjacentTrapCount for one trap', function() {
+  it('sets adjacentTrapCount for one trap', function () {
 
     // Arrange
     
@@ -100,15 +100,21 @@ describe('Board generator', function() {
 
     // Assert
     
-    expect(board[0][0].adjacentTrapCount, '(x:0, y:0)').to.equal(0);
-    expect(board[1][0].adjacentTrapCount, '(x:1, y:0)').to.equal(1);
-    expect(board[0][1].adjacentTrapCount, '(x:0, y:1)').to.equal(1);
-    expect(board[1][1].adjacentTrapCount, '(x:1, y:1)').to.equal(1);
-    expect(board[0][2].adjacentTrapCount, '(x:0, y:2)').to.equal(0);
-    expect(board[1][2].adjacentTrapCount, '(x:1, y:2)').to.equal(0);
+    const expected = [
+      { x: 0, y: 0, result: 0 },
+      { x: 1, y: 0, result: 1 },
+      { x: 0, y: 1, result: 1 },
+      { x: 1, y: 1, result: 1 },
+      { x: 0, y: 2, result: 0 },
+      { x: 1, y: 2, result: 0 }
+    ];
+
+    expected.forEach(({ x, y, result }) => {
+      expect(board[x][y].adjacentTrapCount, `(x:${x}, y:${y})`).to.equal(result);
+    });
   });
 
-  it('sets adjacentTrapCount for two traps', function() {
+  it('sets adjacentTrapCount for two traps', function () {
 
     // Arrange
     
@@ -121,16 +127,22 @@ describe('Board generator', function() {
     const board = generatorWithInjection.generateBoard(width, height, 2);
 
     // Assert
-    
-    expect(board[0][0].adjacentTrapCount, '(x:0, y:0)').to.equal(1);
-    expect(board[1][0].adjacentTrapCount, '(x:1, y:0)').to.equal(1);
-    expect(board[0][1].adjacentTrapCount, '(x:0, y:1)').to.equal(2);
-    expect(board[1][1].adjacentTrapCount, '(x:1, y:1)').to.equal(2);
-    expect(board[0][2].adjacentTrapCount, '(x:0, y:2)').to.equal(0);
-    expect(board[1][2].adjacentTrapCount, '(x:1, y:2)').to.equal(0);
+
+    const expected = [
+      { x: 0, y: 0, result: 1 },
+      { x: 1, y: 0, result: 1 },
+      { x: 0, y: 1, result: 2 },
+      { x: 1, y: 1, result: 2 },
+      { x: 0, y: 2, result: 0 },
+      { x: 1, y: 2, result: 0 }
+    ];
+
+    expected.forEach(({ x, y, result }) => {
+      expect(board[x][y].adjacentTrapCount, `(x:${x}, y:${y})`).to.equal(result);
+    });
   });
 
-  it('sets isRevealed false on cell by default', function() {
+  it('sets isRevealed false on cell by default', function () {
 
     // Arrange
 
