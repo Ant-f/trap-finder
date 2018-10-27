@@ -3,7 +3,7 @@
 import { expect } from 'chai';
 import generator from '../../src/helpers/board-generator';
 
-describe('trap location generator', function() {
+describe('Board generator', function() {
   it('returns a correct sized board', function() {
 
     // Arrange
@@ -128,5 +128,21 @@ describe('trap location generator', function() {
     expect(board[1][1].adjacentTrapCount, '(x:1, y:1)').to.equal(2);
     expect(board[0][2].adjacentTrapCount, '(x:0, y:2)').to.equal(0);
     expect(board[1][2].adjacentTrapCount, '(x:1, y:2)').to.equal(0);
+  });
+
+  it('sets isRevealed false on cell by default', function() {
+
+    // Arrange
+
+    const height = 1;
+    const width = 1;
+
+    // Act
+
+    const board = generator.generateBoard(width, height, 0);
+
+    // Assert
+
+    expect(board[0][0].isRevealed).to.be.false;
   });
 });
