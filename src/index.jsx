@@ -1,16 +1,15 @@
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import reducer from './reducer';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import TrapGrid from './containers/trap-grid-container';
 
 const store = createStore(reducer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>
-      Page Content
-    </div>
+    <TrapGrid />
   </Provider>,
   document.getElementById('app-content'),
 );
