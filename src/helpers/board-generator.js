@@ -1,4 +1,5 @@
 import { getRandomInt } from './random-number-generator';
+import pointHelper from './point-helper';
 
 const createTraps = (width, height, trapCount) => {
   const traps = [];
@@ -44,25 +45,15 @@ const setAdjacentTrapCount = (traps, board) => {
   const height = board[0].length;
 
   traps.forEach(({ x, y }) => {
-    const surroundingPoints = [
-      { x: x - 1, y: y - 1 },
-      { x, y: y - 1 },
-      { x: x + 1, y: y - 1 },
-      { x: x - 1, y },
-      { x: x + 1, y },
-      { x: x - 1, y: y + 1 },
-      { x, y: y + 1 },
-      { x: x + 1, y: y + 1 }
-    ];
+    const surroundingPoints = pointHelper.getSurroundingValidPoints(
+      x,
+      y,
+      width - 1,
+      height - 1);
 
-    surroundingPoints
-      .filter(point => point.x > -1 &&
-        point.x < width &&
-        point.y > -1 &&
-        point.y < height)
-      .forEach(point => {
-        board[point.x][point.y].adjacentTrapCount++;
-      });
+    surroundingPoints.forEach(point => {
+      board[point.x][point.y].adjacentTrapCount++;
+    });
   });
 };
 
