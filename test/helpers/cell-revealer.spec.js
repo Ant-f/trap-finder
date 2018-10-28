@@ -1,5 +1,6 @@
 /* global describe, it */
 
+import { fromJS } from 'immutable';
 import { expect } from 'chai';
 import reveal from '../../src/helpers/cell-revealer';
 
@@ -26,7 +27,7 @@ const convertToBoard = input => {
     });
   });
 
-  return board;
+  return fromJS(board);
 };
 
 describe('Cell revealer', function () {
@@ -42,7 +43,7 @@ describe('Cell revealer', function () {
 
     // Act
 
-    reveal(0, 0, board);
+    const updated = reveal(0, 0, board);
     
     // Assert
 
@@ -57,10 +58,11 @@ describe('Cell revealer', function () {
       { x: 1, y: 2 }
     ];
 
-    expectedRevealed.forEach(point =>
-      expect(board[point.x][point.y].isRevealed).to.be.true
-    );
+    expectedRevealed.forEach(point => {
+      const actual = updated.getIn([point.x, point.y, 'isRevealed']);
+      expect(actual, `(x:${point.x}, y:${point.y})`).to.be.true;
+    });
 
-    expect(board[2][2].isRevealed).to.be.false;
+    expect(updated.getIn([2, 2, 'isRevealed'])).to.be.false;
   });
 });

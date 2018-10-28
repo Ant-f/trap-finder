@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import reducer from '../src/reducer';
 
 describe('Reducer', function() {
-  it('returns a default board when state is undefined', function() {
+  it('Returns a default board when state is undefined', function() {
 
     // Arrange, Act
 
@@ -12,10 +12,11 @@ describe('Reducer', function() {
 
     // Assert
 
-    expect(state.board.length).to.equal(9);
+    const board = state.get('board');
+    expect(board.size).to.equal(9);
 
-    state.board.forEach(column => {
-      expect(column.length).to.equal(9);
+    board.map(column => {
+      expect(column.size).to.equal(9);
     });
   });
 });

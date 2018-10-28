@@ -1,19 +1,30 @@
-import pointHelper from './point-helper';
+import helper from './point-helper';
 
-const reveal = (x, y, board) => {
-  board[x][y].isRevealed = true;
+const reveal = (x, y, board, maxX, maxY) => {
+  let updated = board.setIn([x, y, 'isRevealed'], true);
 
-  if (board[x][y].adjacentTrapCount === 0) {
-    const surroundingPoints = pointHelper.getSurroundingValidPoints(
-      x,
-      y,
-      board.length - 1,
-      board[0].length - 1);
-    
-    surroundingPoints
-      .filter(point => !board[point.x][point.y].isRevealed)
-      .forEach(point => reveal(point.x, point.y, board));
+  if (board.getIn([x, y, 'adjacentTrapCount']) === 0) {
+    const surroundingPoints = helper.getSurroundingValidPoints(x, y, maxX, maxY);
+
+    surroundingPoints.forEach(point => {
+      const isRevealed = updated.getIn([point.x, point.y, 'isRevealed']);
+
+      if (!isRevealed) {
+        updated = reveal(point.x, point.y, updated, maxX, maxY);
+      }
+    });
   }
+
+  return updated;
 };
 
-export default reveal;
+const revealWithMutation = (x, y, board) => {
+  return board.withMutations(b => reveal(
+    x,
+    y,
+    b,
+    b.size - 1,
+    b.get(0).size - 1));
+};
+
+export default revealWithMutation;

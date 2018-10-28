@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { getRandomInt } from './random-number-generator';
 import pointHelper from './point-helper';
 
@@ -57,13 +58,11 @@ const setAdjacentTrapCount = (traps, board) => {
   });
 };
 
-const boardGenerator = {
+export default {
   generateBoard(width, height, trapCount) {
     const traps = createTraps(width, height, trapCount);
     const board = createBoard(width, height, traps);
     setAdjacentTrapCount(traps, board);
-    return board;
+    return fromJS(board);
   }
 };
-
-export default boardGenerator;
