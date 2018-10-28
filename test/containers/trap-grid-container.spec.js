@@ -7,11 +7,22 @@ import { mapStateToProps } from '../../src/containers/trap-grid-container';
 describe('TrapGrid container', function () {
   it('Maps state to props', function () {
 
-    const state = fromJS({
-      board: 'board'
-    });
+    // Arrange
 
-    const { model } = mapStateToProps(state);
+    const state = {
+      board: 'board',
+      gameOver: true
+    };
+
+    const immutableState = fromJS(state);
+
+    // Act
+    
+    const { isGameOver, model } = mapStateToProps(immutableState);
+
+    // Assert
+
+    expect(isGameOver).to.equal(state.gameOver);
     expect(model).to.equal(state.board);
   });
 });

@@ -1,10 +1,19 @@
 import { connect } from 'react-redux';
+import * as actions from '../actions/action-creators';
 import TrapGrid from '../components/trap-grid.jsx';
 
-export const mapStateToProps = state => {
+const mapDispatchToProps = dispatch => {
   return {
-    model: state.board
+    revealCell: (x, y) => dispatch(
+      actions.revealCell(x, y)),
   };
 };
 
-export default connect(mapStateToProps)(TrapGrid);
+export const mapStateToProps = state => {
+  return {
+    isGameOver: state.get('gameOver'),
+    model: state.get('board')
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrapGrid);
