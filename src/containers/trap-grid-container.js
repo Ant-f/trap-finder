@@ -4,8 +4,8 @@ import TrapGrid from '../components/trap-grid.jsx';
 
 const mapDispatchToProps = dispatch => {
   return {
-    revealCell: (x, y) => dispatch(
-      actions.revealCell(x, y)),
+    revealCellAt: (x, y) => dispatch(
+      actions.revealCellAt(x, y)),
   };
 };
 

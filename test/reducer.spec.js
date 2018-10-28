@@ -32,7 +32,7 @@ describe('Reducer', function () {
 
     const x = 4;
     const y = 7;
-    const action = actions.revealCell(x, y);
+    const action = actions.revealCellAt(x, y);
     
     const state = fromJS({
       board: [],
@@ -66,7 +66,7 @@ describe('Reducer', function () {
       gameOver: false
     });
 
-    const action = actions.revealCell(0, 0);
+    const action = actions.revealCellAt(0, 0);
 
     // Act
 
