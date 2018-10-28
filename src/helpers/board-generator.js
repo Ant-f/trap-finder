@@ -1,13 +1,13 @@
 import { fromJS } from 'immutable';
-import { getRandomInt } from './random-number-generator';
 import pointHelper from './point-helper';
+import rng from './random-number-generator';
 
 const createTraps = (width, height, trapCount) => {
   const traps = [];
     
   while (traps.length < trapCount) {
-    const x = getRandomInt(width);
-    const y = getRandomInt(height);
+    const x = rng(width);
+    const y = rng(height);
 
     const exists = traps.findIndex(point =>
       point.x === x && point.y === y) > -1;

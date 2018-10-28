@@ -4,7 +4,7 @@ import generator from './helpers/board-generator';
 import reveal from './helpers/cell-revealer';
 
 const defaultState = fromJS({
-  board: generator.generateBoard(9, 9),
+  board: generator.generateBoard(9, 9, 10),
   gameOver: false
 });
 

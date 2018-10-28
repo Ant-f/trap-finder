@@ -24,6 +24,10 @@ describe('Reducer', function () {
     board.map(column => {
       expect(column.size).to.equal(9);
     });
+
+    const cells = board.flatten(1);
+    const traps = cells.filter(c => c.get('isTrap'));
+    expect(traps.size).to.equal(10);
   });
 
   it('Reveals safe board cells', function () {

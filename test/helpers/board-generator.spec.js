@@ -8,11 +8,7 @@ const getBoardGenerator = (fixedRandomNumberSequence) => {
   const returnValues = fixedRandomNumberSequence;
 
   const generatorWithInjection = generatorModule({
-    './random-number-generator': {
-      getRandomInt() {
-        return returnValues.shift();
-      }
-    }
+    './random-number-generator': () => returnValues.shift()
   }).default;
 
   return generatorWithInjection;
@@ -80,7 +76,7 @@ describe('Board generator', function () {
     // Assert
     
     const cells = board.flatten(1);
-    const traps = cells.filter(c => c.get('isTrap') === true);
+    const traps = cells.filter(c => c.get('isTrap'));
     expect(traps.size).to.equal(trapCount);
     expect(board.getIn([1, 1, 'isTrap'])).to.be.true;
     expect(board.getIn([3, 2, 'isTrap'])).to.be.true;
