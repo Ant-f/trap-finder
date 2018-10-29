@@ -1,8 +1,9 @@
 import * as React from 'react';
+import * as styles from '../../stylesheets/grid-cell.scss';
 import PropTypes from 'prop-types';
 
 const GridCell = ({ adjacentTrapCount, isGameOver, isRevealed, isTrap, revealCell }) => (
-  <div onClick={revealCell}>
+  <div className={styles.cell} onClick={revealCell}>
     {
       isTrap
         ? isGameOver

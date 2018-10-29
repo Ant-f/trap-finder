@@ -1,5 +1,6 @@
 /* global __dirname, module, require */
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -14,6 +15,9 @@ module.exports = {
     new webpack.SourceMapDevToolPlugin({
       filename: null, // inline sourcemap
       test: /\.js($|\?)/i // case-insensitive match for js files
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'stylesheets/main.css'
     })
   ],
     
@@ -28,6 +32,24 @@ module.exports = {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       use: 'babel-loader'
+    }, {
+      test: /\.scss$/,
+      use: [{
+        loader: MiniCssExtractPlugin.loader
+      }, {
+        loader: 'css-loader', // translates CSS into CommonJS
+        options: {
+          camelCase: true,
+          localIdentName: '[path][name]__[local]--[hash:base64:5]',
+          modules: true,
+          sourceMap: true
+        }
+      }, {
+        loader: 'sass-loader', // compiles Sass to CSS, using Node Sass by default
+        options: {
+          sourceMap: true
+        }
+      }]
     }]
   },
 
