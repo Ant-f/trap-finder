@@ -1,5 +1,9 @@
 $cell-size: 4em;
 
+.column-set {
+  display: flex;
+}
+
 .cell {
   background: lightgray;
   border: 0.1em solid gray;

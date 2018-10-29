@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as styles from '../../stylesheets/grid-cell.scss';
+import * as styles from '../../stylesheets/trap-grid.scss';
 import PropTypes from 'prop-types';
 
 const GridCell = ({ adjacentTrapCount, isGameOver, isRevealed, isTrap, revealCell }) => (
@@ -10,12 +10,12 @@ const GridCell = ({ adjacentTrapCount, isGameOver, isRevealed, isTrap, revealCel
           ? <span>
             T
           </span>
-          : '(Empty)'
+          : null
         : isRevealed && adjacentTrapCount > 0
           ? <span>
             {adjacentTrapCount}
           </span>
-          : '(Empty)'
+          : null
     }
   </div>
 );

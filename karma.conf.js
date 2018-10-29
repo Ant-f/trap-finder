@@ -3,10 +3,10 @@
 const webpackConfig = require('./webpack.config.js');
 
 // Karma configuration 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
-    browsers: [ 'Chrome' ],
-    frameworks: [ 'mocha' ],
+    browsers: ['Chrome'],
+    frameworks: ['mocha'],
     
     files: [
       // each file acts as entry point for the webpack configuration 
@@ -18,7 +18,21 @@ module.exports = function(config) {
     },
 
     webpack: {
-      module: webpackConfig.module,
+      mode: webpackConfig.mode,
+      module: {
+        rules: [{
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: 'babel-loader'
+        }, {
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          use: 'babel-loader'
+        }, {
+          test: /\.scss$/,
+          use: 'null-loader'
+        }]
+      },
       plugins: webpackConfig.plugins,
       resolve: webpackConfig.resolve
     },
