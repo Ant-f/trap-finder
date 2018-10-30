@@ -1,12 +1,31 @@
+$border-width: 0.1em;
 $cell-size: 4em;
+
+.cell {
+  align-items: center;
+  border: $border-width solid rgb(124, 124, 124);
+  display: flex;
+  justify-content: center;
+  height: $cell-size;
+  width: $cell-size;
+}
 
 .column-set {
   display: flex;
 }
 
-.cell {
-  background: lightgray;
-  border: 0.1em solid gray;
-  height: $cell-size;
-  width: $cell-size;
+.revealed {
+  background: rgb(165, 255, 137);
+}
+
+.trap {
+  background: rgb(255, 197, 197);
+}
+
+.unrevealed {
+  background: rgb(223, 223, 223);
+}
+
+img {
+  width: 4em;
 }

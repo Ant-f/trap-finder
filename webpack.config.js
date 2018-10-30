@@ -50,6 +50,18 @@ module.exports = {
           sourceMap: true
         }
       }]
+    }, {
+      test: /\.(svg)$/i,
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: '[hash].[ext]',
+          outputPath: 'images/',
+          publicPath: '../'
+        }
+      }, {
+        loader: 'image-webpack-loader'
+      }]
     }]
   },
 

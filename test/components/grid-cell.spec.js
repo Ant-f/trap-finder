@@ -3,7 +3,60 @@
 import { expect } from 'chai';
 import * as React from 'react';
 import Enzyme from '../root-hooks.spec.js';
-import GridCell from '../../src/components/grid-cell.jsx';
+import GridCell, { getClasses } from '../../src/components/grid-cell.jsx';
+
+describe('getClasses', function () {
+  const classNames = {
+    cell: 'cell',
+    revealed: 'revealed',
+    trap: 'trap',
+    unrevealed: 'unrevealed'
+  };
+
+  let gameOver;
+
+  describe('When game is over', function () {
+    this.beforeEach(function () {
+      gameOver = true;
+    });
+
+    it('returns "trap" when is trap', function () {
+      const names = getClasses(classNames, gameOver, false, true);
+      expect(names).to.equal('cell trap');
+    });
+
+    it('returns "unrevealed" when is not revealed', function () {
+      const names = getClasses(classNames, gameOver, false, false);
+      expect(names).to.equal('cell unrevealed');
+    });
+
+    it('returns "revealed" when is revealed', function () {
+      const names = getClasses(classNames, gameOver, true, false);
+      expect(names).to.equal('cell revealed');
+    });
+  });
+
+  describe('When game is not over', function () {
+    this.beforeEach(function () {
+      gameOver = false;
+    });
+
+    it('returns "unrevealed" when is trap', function () {
+      const names = getClasses(classNames, gameOver, false, true);
+      expect(names).to.equal('cell unrevealed');
+    });
+
+    it('returns "unrevealed" when is not revealed', function () {
+      const names = getClasses(classNames, gameOver, false, false);
+      expect(names).to.equal('cell unrevealed');
+    });
+
+    it('returns "revealed" when is revealed', function () {
+      const names = getClasses(classNames, gameOver, true, false);
+      expect(names).to.equal('cell revealed');
+    });
+  });
+});
 
 const getWrapper = props => {
   return Enzyme.shallow(
@@ -30,8 +83,8 @@ describe('<GridCell/>', function () {
 
     it('Shows trap when present', function () {
       const wrapper = getWrapper({ ...props, isTrap: true });
-      const span = wrapper.find('span');
-      expect(span.text().trim()).to.equal('T');
+      const image = wrapper.find('img[src="images/bear-trap.svg"]');
+      expect(image).to.have.lengthOf(1);
     });
 
     it('Does not show trap when not present', function () {
