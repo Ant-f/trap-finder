@@ -80,4 +80,68 @@ describe('Reducer', function () {
 
     expect(updated.getIn(['gameLost'])).to.be.true;
   });
+
+  describe('Toggle-flag action', () => {
+    it('Sets flag on unflagged and unrevealed cell', () => {
+      // Arrange
+
+      const state = fromJS({
+        board: [[{
+          isRevealed: false,
+          isFlagged: false
+        }]]
+      });
+
+      const action = actions.toggleFlagAt(0, 0);
+
+      // Act
+
+      const updated = reducer(state, action);
+
+      // Assert
+
+      expect(updated.getIn(['board', 0, 0, 'isFlagged'])).to.be.true;
+    });
+
+    it('Does not set flag on unflagged and revealed cell', () => {
+      // Arrange
+
+      const state = fromJS({
+        board: [[{
+          isRevealed: true,
+          isFlagged: false
+        }]]
+      });
+
+      const action = actions.toggleFlagAt(0, 0);
+
+      // Act
+
+      const updated = reducer(state, action);
+
+      // Assert
+
+      expect(updated.getIn(['board', 0, 0, 'isFlagged'])).to.be.false;
+    });
+
+    it('Unsets flag on flagged cell', () => {
+      // Arrange
+
+      const state = fromJS({
+        board: [[{
+          isFlagged: true
+        }]]
+      });
+
+      const action = actions.toggleFlagAt(0, 0);
+
+      // Act
+
+      const updated = reducer(state, action);
+
+      // Assert
+
+      expect(updated.getIn(['board', 0, 0, 'isFlagged'])).to.be.false;
+    });
+  });
 });

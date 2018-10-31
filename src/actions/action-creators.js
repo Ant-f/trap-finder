@@ -6,3 +6,10 @@ export const revealCellAt = (x, y) => {
     data: { x, y }
   };
 };
+
+export const toggleFlagAt = (x, y) => {
+  return {
+    type: actionTypes.TOGGLE_FLAG,
+    data: { x, y }
+  };
+};

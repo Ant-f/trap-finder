@@ -8,6 +8,7 @@ import TrapGrid from '../../src/components/trap-grid.jsx';
 
 const cell = () => ({
   adjacentTrapCount: 0,
+  isFlagged: false,
   isRevealed: false,
   isTrap: false
 });
@@ -23,7 +24,8 @@ describe('<TrapGrid/>', function () {
       <TrapGrid
         isGameLost={false}
         model={model}
-        revealCellAt={() => { }} />);
+        revealCellAt={() => { }}
+        toggleFlagAt={() => { }} />);
     
     const cells = wrapper.find('GridCell');
     expect(cells).to.have.lengthOf(4);

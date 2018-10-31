@@ -4,3 +4,4 @@ and are released into the Public Domain. TrapFinder has no association with
 actual images themselves.
 
 * bear-trap.svg
+* red-flag.svg

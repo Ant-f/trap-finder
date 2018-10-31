@@ -6,6 +6,8 @@ const mapDispatchToProps = dispatch => {
   return {
     revealCellAt: (x, y) => dispatch(
       actions.revealCellAt(x, y)),
+    toggleFlagAt: (x, y) => dispatch(
+      actions.toggleFlagAt(x, y))
   };
 };
 

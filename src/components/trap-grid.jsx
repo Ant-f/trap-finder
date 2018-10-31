@@ -4,7 +4,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import GridCell from './grid-cell.jsx';
 
-const TrapGrid = ({ isGameLost, model, revealCellAt }) => (
+const TrapGrid = ({ isGameLost, model, revealCellAt, toggleFlagAt }) => (
   <div className={`${styles.columnSet}`}>
     {
       model.map((column, x) =>
@@ -13,11 +13,13 @@ const TrapGrid = ({ isGameLost, model, revealCellAt }) => (
             column.map((cell, y) =>
               <GridCell
                 adjacentTrapCount={cell.get('adjacentTrapCount')}
+                isFlagged={cell.get('isFlagged')}
                 isGameLost={isGameLost}
                 isRevealed={cell.get('isRevealed')}
                 isTrap={cell.get('isTrap')}
                 key={y}
-                revealCell={() => revealCellAt(x, y)} />
+                revealCell={() => revealCellAt(x, y)}
+                toggleFlag={() => toggleFlagAt(x, y)}/>
             )
           }
         </div>
@@ -36,7 +38,8 @@ TrapGrid.propTypes = {
       })
     )
   ).isRequired,
-  revealCellAt: PropTypes.func.isRequired
+  revealCellAt: PropTypes.func.isRequired,
+  toggleFlagAt: PropTypes.func.isRequired
 };
 
 export default TrapGrid;

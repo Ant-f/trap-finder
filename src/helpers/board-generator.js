@@ -32,6 +32,7 @@ const createBoard = (width, height, traps) => {
       
       board[x][y] = {
         adjacentTrapCount: 0,
+        isFlagged: false,
         isRevealed: false,
         isTrap: isTrapLocation
       };

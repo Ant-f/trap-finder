@@ -24,6 +24,20 @@ export default (state = defaultState, action) => {
       const updatedState = state.set('board', updatedBoard);
       return updatedState;
     }
+
+    case actionTypes.TOGGLE_FLAG: {
+      const { x, y } = action.data;
+      const isRevealed = !!state.getIn(['board', x, y, 'isRevealed']);
+
+      if (isRevealed) {
+        return state;
+      }
+
+      const isFlagged = !!state.getIn(['board', x, y, 'isFlagged']);
+      const updated = state.setIn(['board', x, y, 'isFlagged'], !isFlagged);
+      return updated;
+    }
+
     default: {
       return state;
     }

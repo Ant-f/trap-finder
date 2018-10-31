@@ -32,10 +32,19 @@ export const getClasses = (classNames, isGameLost, isRevealed, isTrap) => {
   return `${classNames.cell} ${modifier}`;
 };
 
-const GridCell = ({ adjacentTrapCount, isGameLost, isRevealed, isTrap, revealCell }) => (
+const onClick = (e, revealCell, toggleFlag) => {
+  if (e.ctrlKey) {
+    toggleFlag();
+  }
+  else {
+    revealCell();
+  }
+};
+
+const GridCell = ({ adjacentTrapCount, isFlagged, isGameLost, isRevealed, isTrap, revealCell, toggleFlag }) => (
   <div
     className={getClasses(styles, isGameLost, isRevealed, isTrap)}
-    onClick={revealCell}>
+    onClick={e => { onClick(e, revealCell, toggleFlag); }}>
     {
       isTrap
         ? isGameLost
@@ -49,15 +58,22 @@ const GridCell = ({ adjacentTrapCount, isGameLost, isRevealed, isTrap, revealCel
           </span>
           : null
     }
+    {
+      isFlagged
+        ? <img src="images/red-flag.svg" />
+        : null
+    }
   </div>
 );
 
 GridCell.propTypes = {
   adjacentTrapCount: PropTypes.number.isRequired,
+  isFlagged: PropTypes.bool.isRequired,
   isGameLost: PropTypes.bool.isRequired,
   isRevealed: PropTypes.bool.isRequired,
   isTrap: PropTypes.bool.isRequired,
-  revealCell: PropTypes.func.isRequired
+  revealCell: PropTypes.func.isRequired,
+  toggleFlag: PropTypes.func.isRequired
 };
 
 export default GridCell;
