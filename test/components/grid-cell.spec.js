@@ -13,46 +13,46 @@ describe('getClasses', function () {
     unrevealed: 'unrevealed'
   };
 
-  let gameOver;
+  let gameLost;
 
-  describe('When game is over', function () {
+  describe('When game is lost', function () {
     this.beforeEach(function () {
-      gameOver = true;
+      gameLost = true;
     });
 
     it('returns "trap" when is trap', function () {
-      const names = getClasses(classNames, gameOver, false, true);
+      const names = getClasses(classNames, gameLost, false, true);
       expect(names).to.equal('cell trap');
     });
 
     it('returns "unrevealed" when is not revealed', function () {
-      const names = getClasses(classNames, gameOver, false, false);
+      const names = getClasses(classNames, gameLost, false, false);
       expect(names).to.equal('cell unrevealed');
     });
 
     it('returns "revealed" when is revealed', function () {
-      const names = getClasses(classNames, gameOver, true, false);
+      const names = getClasses(classNames, gameLost, true, false);
       expect(names).to.equal('cell revealed');
     });
   });
 
-  describe('When game is not over', function () {
+  describe('When game is not lost', function () {
     this.beforeEach(function () {
-      gameOver = false;
+      gameLost = false;
     });
 
     it('returns "unrevealed" when is trap', function () {
-      const names = getClasses(classNames, gameOver, false, true);
+      const names = getClasses(classNames, gameLost, false, true);
       expect(names).to.equal('cell unrevealed');
     });
 
     it('returns "unrevealed" when is not revealed', function () {
-      const names = getClasses(classNames, gameOver, false, false);
+      const names = getClasses(classNames, gameLost, false, false);
       expect(names).to.equal('cell unrevealed');
     });
 
     it('returns "revealed" when is revealed', function () {
-      const names = getClasses(classNames, gameOver, true, false);
+      const names = getClasses(classNames, gameLost, true, false);
       expect(names).to.equal('cell revealed');
     });
   });
@@ -62,7 +62,7 @@ const getWrapper = props => {
   return Enzyme.shallow(
     <GridCell
       adjacentTrapCount={props.adjacentTrapCount}
-      isGameOver={props.isGameOver}
+      isGameLost={props.isGameLost}
       isRevealed={props.isRevealed}
       isTrap={props.isTrap}
       revealCell={() => { }}/>);
@@ -71,14 +71,14 @@ const getWrapper = props => {
 describe('<GridCell/>', function () {
   let props = {
     adjacentTrapCount: 0,
-    isGameOver: false,
+    isGameLost: false,
     isRevealed: false,
     isTrap: false
   };
 
-  describe('When the game is over', function () {
+  describe('When the game is lost', function () {
     this.beforeEach(function () {
-      props = {...props, isGameOver: true};
+      props = {...props, isGameLost: true};
     });
 
     it('Shows trap when present', function () {
@@ -94,9 +94,9 @@ describe('<GridCell/>', function () {
     });
   });
 
-  describe('When the game is not over', function () {
+  describe('When the game is not lost', function () {
     this.beforeEach(function () {
-      props = { ...props, isGameOver: false };
+      props = { ...props, isGameLost: false };
     });
 
     it('Does not show trap when present', function () {

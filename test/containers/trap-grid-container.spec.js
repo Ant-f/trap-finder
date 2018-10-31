@@ -11,18 +11,18 @@ describe('TrapGrid container', function () {
 
     const state = {
       board: 'board',
-      gameOver: true
+      gameLost: true
     };
 
     const immutableState = fromJS(state);
 
     // Act
     
-    const { isGameOver, model } = mapStateToProps(immutableState);
+    const { isGameLost, model } = mapStateToProps(immutableState);
 
     // Assert
 
-    expect(isGameOver).to.equal(state.gameOver);
+    expect(isGameLost).to.equal(state.gameLost);
     expect(model).to.equal(state.board);
   });
 });

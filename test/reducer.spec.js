@@ -40,7 +40,7 @@ describe('Reducer', function () {
     
     const state = fromJS({
       board: [],
-      gameOver: false
+      gameLost: false
     });
     
     const reveal = sinon.fake();
@@ -56,7 +56,7 @@ describe('Reducer', function () {
     // Assert
 
     expect(reveal).to.have.been.calledOnceWith(x, y, state.get('board'));
-    expect(updated.getIn(['gameOver'])).to.be.false;
+    expect(updated.getIn(['gameLost'])).to.be.false;
   });
 
   it('Ends game when revealing a trap', function () {
@@ -67,7 +67,7 @@ describe('Reducer', function () {
       board: [[{
         isTrap: true
       }]],
-      gameOver: false
+      gameLost: false
     });
 
     const action = actions.revealCellAt(0, 0);
@@ -78,6 +78,6 @@ describe('Reducer', function () {
 
     // Assert
 
-    expect(updated.getIn(['gameOver'])).to.be.true;
+    expect(updated.getIn(['gameLost'])).to.be.true;
   });
 });

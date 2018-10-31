@@ -21,7 +21,7 @@ describe('<TrapGrid/>', function () {
 
     const wrapper = Enzyme.shallow(
       <TrapGrid
-        isGameOver={false}
+        isGameLost={false}
         model={model}
         revealCellAt={() => { }} />);
     

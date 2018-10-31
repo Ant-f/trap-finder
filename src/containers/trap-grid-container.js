@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => {
 
 export const mapStateToProps = state => {
   return {
-    isGameOver: state.get('gameOver'),
+    isGameLost: state.get('gameLost'),
     model: state.get('board')
   };
 };

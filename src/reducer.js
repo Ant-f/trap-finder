@@ -5,7 +5,7 @@ import reveal from './helpers/cell-revealer';
 
 const defaultState = fromJS({
   board: generator.generateBoard(9, 9, 10),
-  gameOver: false
+  gameLost: false
 });
 
 /* eslint indent: 'off' */
@@ -17,7 +17,7 @@ export default (state = defaultState, action) => {
       const isTrap = state.getIn(['board', x, y, 'isTrap']);
 
       if (isTrap) {
-        return state.setIn(['gameOver'], true);
+        return state.setIn(['gameLost'], true);
       }
 
       const updatedBoard = reveal(x, y, state.get('board'));

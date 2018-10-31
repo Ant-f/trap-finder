@@ -14,10 +14,10 @@ const countColours = {
   8: 'eight'
 };
 
-export const getClasses = (classNames, isGameOver, isRevealed, isTrap) => {
+export const getClasses = (classNames, isGameLost, isRevealed, isTrap) => {
   let modifier;
 
-  if (isGameOver && isTrap) {
+  if (isGameLost && isTrap) {
     modifier = classNames.trap;
   }
   else {
@@ -32,13 +32,13 @@ export const getClasses = (classNames, isGameOver, isRevealed, isTrap) => {
   return `${classNames.cell} ${modifier}`;
 };
 
-const GridCell = ({ adjacentTrapCount, isGameOver, isRevealed, isTrap, revealCell }) => (
+const GridCell = ({ adjacentTrapCount, isGameLost, isRevealed, isTrap, revealCell }) => (
   <div
-    className={getClasses(styles, isGameOver, isRevealed, isTrap)}
+    className={getClasses(styles, isGameLost, isRevealed, isTrap)}
     onClick={revealCell}>
     {
       isTrap
-        ? isGameOver
+        ? isGameLost
           ? <img src="images/bear-trap.svg" />
           : null
         : isRevealed && adjacentTrapCount > 0
@@ -54,7 +54,7 @@ const GridCell = ({ adjacentTrapCount, isGameOver, isRevealed, isTrap, revealCel
 
 GridCell.propTypes = {
   adjacentTrapCount: PropTypes.number.isRequired,
-  isGameOver: PropTypes.bool.isRequired,
+  isGameLost: PropTypes.bool.isRequired,
   isRevealed: PropTypes.bool.isRequired,
   isTrap: PropTypes.bool.isRequired,
   revealCell: PropTypes.func.isRequired
