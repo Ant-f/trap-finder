@@ -57,7 +57,7 @@ describe('Reducer', function () {
     // Assert
 
     expect(reveal).to.have.been.calledOnceWith(x, y, state.get('board'));
-    expect(updated.getIn(['gameLost'])).to.be.false;
+    expect(updated.get('gameLost')).to.be.false;
     expect(updated.get('timerState')).to.equal(timerStates.STARTED);
   });
 
@@ -80,7 +80,7 @@ describe('Reducer', function () {
 
     // Assert
 
-    expect(updated.getIn(['gameLost'])).to.be.true;
+    expect(updated.get('gameLost')).to.be.true;
     expect(updated.get('timerState')).to.equal(timerStates.STOPPED);
   });
 
