@@ -2,6 +2,7 @@
 
 import { fromJS } from 'immutable';
 import * as actions from '../src/actions/action-creators';
+import * as timerStates from '../src/components/timer-states';
 import chai, { expect } from 'chai';
 import reducer from '../src/reducer';
 import sinon from 'sinon';
@@ -57,6 +58,7 @@ describe('Reducer', function () {
 
     expect(reveal).to.have.been.calledOnceWith(x, y, state.get('board'));
     expect(updated.getIn(['gameLost'])).to.be.false;
+    expect(updated.get('timerState')).to.equal(timerStates.STARTED);
   });
 
   it('Ends game when revealing a trap', function () {
@@ -79,6 +81,7 @@ describe('Reducer', function () {
     // Assert
 
     expect(updated.getIn(['gameLost'])).to.be.true;
+    expect(updated.get('timerState')).to.equal(timerStates.STOPPED);
   });
 
   describe('Toggle-flag action', () => {
@@ -101,6 +104,7 @@ describe('Reducer', function () {
       // Assert
 
       expect(updated.getIn(['board', 0, 0, 'isFlagged'])).to.be.true;
+      expect(updated.get('timerState')).to.equal(timerStates.STARTED);
     });
 
     it('Does not set flag on unflagged and revealed cell', () => {

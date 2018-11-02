@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import * as actionTypes from './actions/action-types';
+import * as timerStates from './components/timer-states';
 import generator from './helpers/board-generator';
 import reveal from './helpers/cell-revealer';
 
@@ -17,11 +18,17 @@ export default (state = defaultState, action) => {
       const isTrap = state.getIn(['board', x, y, 'isTrap']);
 
       if (isTrap) {
-        return state.setIn(['gameLost'], true);
+        return state.withMutations(s => s
+          .set('gameLost', true)
+          .set('timerState', timerStates.STOPPED));  
       }
 
       const updatedBoard = reveal(x, y, state.get('board'));
-      const updatedState = state.set('board', updatedBoard);
+
+      const updatedState = state.withMutations(s => s
+        .set('board', updatedBoard)
+        .set('timerState', timerStates.STARTED));
+      
       return updatedState;
     }
 
@@ -34,7 +41,11 @@ export default (state = defaultState, action) => {
       }
 
       const isFlagged = !!state.getIn(['board', x, y, 'isFlagged']);
-      const updated = state.setIn(['board', x, y, 'isFlagged'], !isFlagged);
+      
+      const updated = state.withMutations(s => s
+        .setIn(['board', x, y, 'isFlagged'], !isFlagged)
+        .set('timerState', timerStates.STARTED));
+      
       return updated;
     }
 
