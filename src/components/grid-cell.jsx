@@ -52,7 +52,7 @@ const GridCell = ({ adjacentTrapCount, isFlagged, isGameLost, isGameWon, isRevea
     {
       isTrap
         ? isGameLost
-          ? <img src="images/bear-trap.svg" />
+          ? <img className={isFlagged ? styles.faded : null} src="images/bear-trap.svg" />
           : null
         : isRevealed && adjacentTrapCount > 0
           ? <span className={`
@@ -64,7 +64,7 @@ const GridCell = ({ adjacentTrapCount, isFlagged, isGameLost, isGameWon, isRevea
     }
     {
       isFlagged
-        ? <img src="images/red-flag.svg" />
+        ? <img className={styles.flag} src="images/red-flag.svg" />
         : null
     }
   </div>

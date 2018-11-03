@@ -14,6 +14,14 @@ $cell-size: 4em;
   display: flex;
 }
 
+.faded {
+  opacity: 0.2;
+}
+
+.flag {
+  position: absolute;
+}
+
 .revealed {
   background: rgb(165, 255, 137);
 }
