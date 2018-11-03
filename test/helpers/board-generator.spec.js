@@ -4,10 +4,10 @@ import { expect } from 'chai';
 import generator from '../../src/helpers/board-generator';
 
 const getBoardGenerator = (fixedRandomNumberSequence) => {
-  const generatorModule = require('inject-loader!../../src/helpers/board-generator');
   const returnValues = fixedRandomNumberSequence;
-
-  const generatorWithInjection = generatorModule({
+  
+  const generatorWithInjection = require(
+    'inject-loader!../../src/helpers/board-generator')({
     './random-number-generator': () => returnValues.shift()
   }).default;
 

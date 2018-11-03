@@ -4,14 +4,11 @@ import * as React from 'react';
 import { expect } from 'chai';
 import Enzyme from '../root-hooks.spec.js';
 
-const remainingTrapsModule = require(
-  'inject-loader!../../src/components/remaining-traps.jsx');
-
 const styles = {
   faded: 'faded'
 };
 
-const RemainingTraps = remainingTrapsModule({
+const RemainingTraps = require('inject-loader!../../src/components/remaining-traps.jsx')({
   '../../stylesheets/remaining-traps.scss': styles
 }).default;
 

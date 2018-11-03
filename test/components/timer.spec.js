@@ -18,8 +18,7 @@ const getTimer = (elapsedTimeIntervals) => {
     times.push(newTime);
   }
 
-  const timerModule = require('inject-loader!../../src/components/timer.jsx');
-  const TimerWithInjection = timerModule({
+  const TimerWithInjection = require('inject-loader!../../src/components/timer.jsx')({
     '../helpers/time-provider': () => times.shift()
   }).default;
 

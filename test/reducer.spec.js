@@ -45,8 +45,8 @@ describe('Reducer', function () {
     });
     
     const reveal = sinon.fake();
-    const reducerModule = require('inject-loader!../src/reducer');
-    const reducerWithInjection = reducerModule({
+    
+    const reducerWithInjection = require('inject-loader!../src/reducer')({
       './helpers/cell-revealer': reveal
     }).default;
 

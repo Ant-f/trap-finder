@@ -1,62 +1,18 @@
-/* global describe, it */
+/* global describe, it, require */
 
 import { expect } from 'chai';
 import * as React from 'react';
 import Enzyme from '../root-hooks.spec.js';
-import GridCell, { getClasses } from '../../src/components/grid-cell.jsx';
 
-describe('getClasses', function () {
-  const classNames = {
-    cell: 'cell',
-    revealed: 'revealed',
-    trap: 'trap',
-    unrevealed: 'unrevealed'
-  };
+const styles = {
+  trap: 'trap',
+  revealed: 'revealed',
+  unrevealed: 'unrevealed'
+};
 
-  let gameLost;
-
-  describe('When game is lost', function () {
-    this.beforeEach(function () {
-      gameLost = true;
-    });
-
-    it('returns "trap" when is trap', function () {
-      const names = getClasses(classNames, gameLost, false, true);
-      expect(names).to.equal('cell trap');
-    });
-
-    it('returns "unrevealed" when is not revealed', function () {
-      const names = getClasses(classNames, gameLost, false, false);
-      expect(names).to.equal('cell unrevealed');
-    });
-
-    it('returns "revealed" when is revealed', function () {
-      const names = getClasses(classNames, gameLost, true, false);
-      expect(names).to.equal('cell revealed');
-    });
-  });
-
-  describe('When game is not lost', function () {
-    this.beforeEach(function () {
-      gameLost = false;
-    });
-
-    it('returns "unrevealed" when is trap', function () {
-      const names = getClasses(classNames, gameLost, false, true);
-      expect(names).to.equal('cell unrevealed');
-    });
-
-    it('returns "unrevealed" when is not revealed', function () {
-      const names = getClasses(classNames, gameLost, false, false);
-      expect(names).to.equal('cell unrevealed');
-    });
-
-    it('returns "revealed" when is revealed', function () {
-      const names = getClasses(classNames, gameLost, true, false);
-      expect(names).to.equal('cell revealed');
-    });
-  });
-});
+const GridCell = require('inject-loader!../../src/components/grid-cell.jsx')({
+  '../../stylesheets/trap-grid.scss': styles
+}).default;
 
 const getWrapper = props => {
   return Enzyme.shallow(
@@ -101,6 +57,7 @@ describe('<GridCell/>', function () {
     });
 
     const trapSelector = 'img[src="images/bear-trap.svg"]';
+    
     it('Shows trap when present', function () {
       const wrapper = getWrapper({ ...props, isTrap: true });
       const image = wrapper.find(trapSelector);
@@ -111,6 +68,24 @@ describe('<GridCell/>', function () {
       const wrapper = getWrapper({ ...props, isTrap: false });
       const spans = wrapper.find(trapSelector);
       expect(spans).to.have.lengthOf(0);
+    });
+
+    it('has "trap" class when is trap', function () {
+      const wrapper = getWrapper({ ...props, isTrap: true });
+      const root = wrapper.first();
+      expect(root.hasClass(styles.trap)).to.be.true;
+    });
+
+    it('has "unrevealed" class when is not revealed', function () {
+      const wrapper = getWrapper({ ...props, isRevealed: false });
+      const root = wrapper.first();
+      expect(root.hasClass(styles.unrevealed)).to.be.true;
+    });
+
+    it('has "revealed" class when is revealed', function () {
+      const wrapper = getWrapper({ ...props, isRevealed: true });
+      const root = wrapper.first();
+      expect(root.hasClass(styles.revealed)).to.be.true;
     });
   });
 
@@ -129,6 +104,12 @@ describe('<GridCell/>', function () {
       const wrapper = getWrapper({ ...props, isTrap: false });
       const spans = wrapper.find('span');
       expect(spans).to.have.lengthOf(0);
+    });
+
+    it('has "unrevealed" class when is trap', function () {
+      const wrapper = getWrapper({ ...props, isTrap: true });
+      const root = wrapper.first();
+      expect(root.hasClass(styles.unrevealed)).to.be.true;
     });
 
     describe('When not revealed', function () {
@@ -172,6 +153,12 @@ describe('<GridCell/>', function () {
         wrapper.find('div').simulate('click', { ctrlKey: true });
         expect(flagToggled).to.be.true;
       });
+
+      it('has "unrevealed" class when is not revealed', function () {
+        const wrapper = getWrapper({ ...props, isRevealed: false });
+        const root = wrapper.first();
+        expect(root.hasClass(styles.unrevealed)).to.be.true;
+      });
     });
 
     describe('When revealed', function () {
@@ -190,6 +177,12 @@ describe('<GridCell/>', function () {
         const wrapper = getWrapper({ ...props, adjacentTrapCount: 0, isTrap: false });
         const spans = wrapper.find('span');
         expect(spans).to.have.lengthOf(0);
+      });
+
+      it('has "revealed" class when is revealed', function () {
+        const wrapper = getWrapper({ ...props, isRevealed: true });
+        const root = wrapper.first();
+        expect(root.hasClass(styles.revealed)).to.be.true;
       });
     });
   });

@@ -14,7 +14,7 @@ const countColours = {
   8: 'eight'
 };
 
-export const getClasses = (classNames, isGameLost, isRevealed, isTrap) => {
+const getClasses = (classNames, isGameLost, isRevealed, isTrap) => {
   let modifier;
 
   if (isGameLost && isTrap) {
