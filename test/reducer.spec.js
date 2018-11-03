@@ -46,139 +46,141 @@ describe('Reducer', function () {
     expect(isGameWon).to.be.false;
   });
 
-  it('Reveals safe board cells', function () {
+  describe('Toggle-flag action', function () {
+    it('Reveals safe board cells', function () {
 
-    // Arrange
+      // Arrange
 
-    const x = 4;
-    const y = 7;
-    const action = actions.revealCellAt(x, y);
+      const x = 4;
+      const y = 7;
+      const action = actions.revealCellAt(x, y);
     
-    const state = fromJS({
-      board: [],
-      gameLost: false
-    });
+      const state = fromJS({
+        board: [],
+        gameLost: false
+      });
     
-    const reveal = sinon.fake.returns(new List());
-    const reducerWithInjection = require('inject-loader!../src/reducer')({
-      './helpers/cell-revealer': reveal
-    }).default;
+      const reveal = sinon.fake.returns(new List());
+      const reducerWithInjection = require('inject-loader!../src/reducer')({
+        './helpers/cell-revealer': reveal
+      }).default;
 
-    // Act
+      // Act
 
-    const updated = reducerWithInjection(state, action);
+      const updated = reducerWithInjection(state, action);
 
-    // Assert
+      // Assert
 
-    expect(reveal).to.have.been.calledOnceWith(x, y, state.get('board'));
-    expect(updated.get('gameLost')).to.be.false;
-  });
-
-  it('Sets "gameLost" to "true" when revealing a trap', function () {
-    
-    // Arrange
-
-    const state = fromJS({
-      board: [[{
-        isTrap: true
-      }]],
-      gameLost: false,
-      gameWon: false
+      expect(reveal).to.have.been.calledOnceWith(x, y, state.get('board'));
+      expect(updated.get('gameLost')).to.be.false;
     });
 
-    const action = actions.revealCellAt(0, 0);
-
-    // Act
-
-    const updated = reducer(state, action);
-
-    // Assert
-
-    expect(updated.get('gameLost')).to.be.true;
-    expect(updated.get('gameWon')).to.be.false;
-    expect(updated.get('timerState')).to.equal(timerStates.STOPPED);
-  });
-
-  it('Does not set "gameLost" to "true" when trying to reveal a flagged trap', function () {
+    it('Sets "gameLost" to "true" when revealing a trap', function () {
     
-    // Arrange
+      // Arrange
 
-    const state = fromJS({
-      board: [[{
-        isFlagged: true,
-        isTrap: true
-      }]],
-      gameLost: false,
-      timerState: timerStates.STARTED
+      const state = fromJS({
+        board: [[{
+          isTrap: true
+        }]],
+        gameLost: false,
+        gameWon: false
+      });
+
+      const action = actions.revealCellAt(0, 0);
+
+      // Act
+
+      const updated = reducer(state, action);
+
+      // Assert
+
+      expect(updated.get('gameLost')).to.be.true;
+      expect(updated.get('gameWon')).to.be.false;
+      expect(updated.get('timerState')).to.equal(timerStates.STOPPED);
     });
 
-    const action = actions.revealCellAt(0, 0);
-
-    // Act
-
-    const updated = reducer(state, action);
-
-    // Assert
-
-    expect(updated.get('gameLost')).to.be.false;
-    expect(updated.get('timerState')).to.equal(timerStates.STARTED);
-  });
-
-  it('Does not set "gameWon" to "true" when some non-trap cells are unrevealed', function () {
+    it('Does not set "gameLost" to "true" when trying to reveal a flagged trap', function () {
     
-    // Arrange
+      // Arrange
 
-    const state = fromJS({
-      board: [
-        [{ adjacentTrapCount: 1, isRevealed: false, isTrap: false }],
-        [{ adjacentTrapCount: 0, isRevealed: false, isTrap: true }],
-        [{ adjacentTrapCount: 1, isRevealed: false, isTrap: false }]
-      ],
-      gameLost: false,
-      gameWon: false
+      const state = fromJS({
+        board: [[{
+          isFlagged: true,
+          isTrap: true
+        }]],
+        gameLost: false,
+        timerState: timerStates.STARTED
+      });
+
+      const action = actions.revealCellAt(0, 0);
+
+      // Act
+
+      const updated = reducer(state, action);
+
+      // Assert
+
+      expect(updated.get('gameLost')).to.be.false;
+      expect(updated.get('timerState')).to.equal(timerStates.STARTED);
     });
 
-    const action = actions.revealCellAt(0, 0);
-
-    // Act
-
-    const updated = reducer(state, action);
-
-    // Assert
-
-    expect(updated.get('gameLost')).to.be.false;
-    expect(updated.get('gameWon')).to.be.false;
-    expect(updated.get('timerState')).to.equal(timerStates.STARTED);
-  });
-
-  it('Sets "gameWon" to "true" when all non-trap cells are revealed', function () {
+    it('Does not set "gameWon" to "true" when some non-trap cells are unrevealed', function () {
     
-    // Arrange
+      // Arrange
 
-    const state = fromJS({
-      board: [
-        [{ adjacentTrapCount: 0, isRevealed: false, isTrap: false }],
-        [{ adjacentTrapCount: 1, isRevealed: false, isTrap: false }],
-        [{ adjacentTrapCount: 0, isRevealed: false, isTrap: true }]
-      ],
-      gameLost: false,
-      gameWon: false
+      const state = fromJS({
+        board: [
+          [{ adjacentTrapCount: 1, isRevealed: false, isTrap: false }],
+          [{ adjacentTrapCount: 0, isRevealed: false, isTrap: true }],
+          [{ adjacentTrapCount: 1, isRevealed: false, isTrap: false }]
+        ],
+        gameLost: false,
+        gameWon: false
+      });
+
+      const action = actions.revealCellAt(0, 0);
+
+      // Act
+
+      const updated = reducer(state, action);
+
+      // Assert
+
+      expect(updated.get('gameLost')).to.be.false;
+      expect(updated.get('gameWon')).to.be.false;
+      expect(updated.get('timerState')).to.equal(timerStates.STARTED);
     });
 
-    const action = actions.revealCellAt(0, 0);
+    it('Sets "gameWon" to "true" when all non-trap cells are revealed', function () {
+    
+      // Arrange
 
-    // Act
+      const state = fromJS({
+        board: [
+          [{ adjacentTrapCount: 0, isRevealed: false, isTrap: false }],
+          [{ adjacentTrapCount: 1, isRevealed: false, isTrap: false }],
+          [{ adjacentTrapCount: 0, isRevealed: false, isTrap: true }]
+        ],
+        gameLost: false,
+        gameWon: false
+      });
 
-    const updated = reducer(state, action);
+      const action = actions.revealCellAt(0, 0);
 
-    // Assert
+      // Act
 
-    expect(updated.get('gameLost')).to.be.false;
-    expect(updated.get('gameWon')).to.be.true;
-    expect(updated.get('timerState')).to.equal(timerStates.STOPPED);
+      const updated = reducer(state, action);
+
+      // Assert
+
+      expect(updated.get('gameLost')).to.be.false;
+      expect(updated.get('gameWon')).to.be.true;
+      expect(updated.get('timerState')).to.equal(timerStates.STOPPED);
+    });
   });
 
-  describe('Toggle-flag action', () => {
+  describe('Toggle-flag action', function () {
     it('Sets flag on unflagged and unrevealed cell', () => {
       // Arrange
 
