@@ -20,6 +20,7 @@ const getWrapper = props => {
       adjacentTrapCount={props.adjacentTrapCount}
       isFlagged={props.isFlagged}
       isGameLost={props.isGameLost}
+      isGameWon={props.isGameWon}
       isRevealed={props.isRevealed}
       isTrap={props.isTrap}
       revealCell={props.revealCell}
@@ -31,6 +32,7 @@ describe('<GridCell/>', function () {
     adjacentTrapCount: 0,
     isFlagged: false,
     isGameLost: false,
+    isGameWon: false,
     isRevealed: false,
     isTrap: false,
     revealCell: () => { },
@@ -53,7 +55,7 @@ describe('<GridCell/>', function () {
 
   describe('When the game is lost', function () {
     this.beforeEach(function () {
-      props = {...props, isGameLost: true};
+      props = { ...props, isGameLost: true };
     });
 
     const trapSelector = 'img[src="images/bear-trap.svg"]';
@@ -70,22 +72,33 @@ describe('<GridCell/>', function () {
       expect(spans).to.have.lengthOf(0);
     });
 
-    it('has "trap" class when is trap', function () {
+    it('Has "trap" class when is trap', function () {
       const wrapper = getWrapper({ ...props, isTrap: true });
       const root = wrapper.first();
       expect(root.hasClass(styles.trap)).to.be.true;
     });
 
-    it('has "unrevealed" class when is not revealed', function () {
+    it('Has "unrevealed" class when is not revealed', function () {
       const wrapper = getWrapper({ ...props, isRevealed: false });
       const root = wrapper.first();
       expect(root.hasClass(styles.unrevealed)).to.be.true;
     });
 
-    it('has "revealed" class when is revealed', function () {
+    it('Has "revealed" class when is revealed', function () {
       const wrapper = getWrapper({ ...props, isRevealed: true });
       const root = wrapper.first();
       expect(root.hasClass(styles.revealed)).to.be.true;
+    });
+
+    it('Does not reveal cells or toggle flag', function () {
+      const wrapper = getWrapper({
+        ...props,
+        revealCell: () => { throw new Error('Cell reveal unexpected'); },
+        toggleFlag: () => { throw new Error('Flag toggle unexpected'); }
+      });
+
+      wrapper.find('div').simulate('click', {});
+      wrapper.find('div').simulate('click', { ctrlKey: true });
     });
   });
 
@@ -184,6 +197,23 @@ describe('<GridCell/>', function () {
         const root = wrapper.first();
         expect(root.hasClass(styles.revealed)).to.be.true;
       });
+    });
+  });
+
+  describe('When the game is won', function () {
+    this.beforeEach(function () {
+      props = { ...props, isGameWon: true };
+    });
+
+    it('Does not reveal cells or toggle flag', function () {
+      const wrapper = getWrapper({
+        ...props,
+        revealCell: () => { throw new Error('Cell reveal unexpected'); },
+        toggleFlag: () => { throw new Error('Flag toggle unexpected'); }
+      });
+
+      wrapper.find('div').simulate('click', {});
+      wrapper.find('div').simulate('click', { ctrlKey: true });
     });
   });
 });

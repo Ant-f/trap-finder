@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as styles from '../../stylesheets/trap-grid.scss';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import GridCell from './grid-cell.jsx';
+import GridCell from '../containers/grid-cell-container';
 
 const TrapGrid = ({ isGameLost, model, revealCellAt, toggleFlagAt }) => (
   <div className={`${styles.columnSet}`}>

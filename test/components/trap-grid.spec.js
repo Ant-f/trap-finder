@@ -27,7 +27,7 @@ describe('<TrapGrid/>', function () {
         revealCellAt={() => { }}
         toggleFlagAt={() => { }} />);
     
-    const cells = wrapper.find('GridCell');
+    const cells = wrapper.find('Connect(GridCell)');
     expect(cells).to.have.lengthOf(4);
   });
 });

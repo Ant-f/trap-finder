@@ -1,6 +1,6 @@
 /* global describe, it, require */
 
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 import * as actions from '../src/actions/action-creators';
 import * as timerStates from '../src/components/timer-states';
 import chai, { expect } from 'chai';
@@ -31,6 +31,21 @@ describe('Reducer', function () {
     expect(traps.size).to.equal(10);
   });
 
+  it('Returns a default state when action type is unknown', function () {
+
+    // Arrange, Act
+
+    const state = reducer(undefined, {});
+
+    // Assert
+
+    const isGameLost = state.get('gameLost');
+    expect(isGameLost).to.be.false;
+
+    const isGameWon = state.get('gameWon');
+    expect(isGameWon).to.be.false;
+  });
+
   it('Reveals safe board cells', function () {
 
     // Arrange
@@ -44,8 +59,7 @@ describe('Reducer', function () {
       gameLost: false
     });
     
-    const reveal = sinon.fake();
-    
+    const reveal = sinon.fake.returns(new List());
     const reducerWithInjection = require('inject-loader!../src/reducer')({
       './helpers/cell-revealer': reveal
     }).default;
@@ -58,10 +72,9 @@ describe('Reducer', function () {
 
     expect(reveal).to.have.been.calledOnceWith(x, y, state.get('board'));
     expect(updated.get('gameLost')).to.be.false;
-    expect(updated.get('timerState')).to.equal(timerStates.STARTED);
   });
 
-  it('Ends game when revealing a trap', function () {
+  it('Sets "gameLost" to "true" when revealing a trap', function () {
     
     // Arrange
 
@@ -69,7 +82,8 @@ describe('Reducer', function () {
       board: [[{
         isTrap: true
       }]],
-      gameLost: false
+      gameLost: false,
+      gameWon: false
     });
 
     const action = actions.revealCellAt(0, 0);
@@ -81,6 +95,61 @@ describe('Reducer', function () {
     // Assert
 
     expect(updated.get('gameLost')).to.be.true;
+    expect(updated.get('gameWon')).to.be.false;
+    expect(updated.get('timerState')).to.equal(timerStates.STOPPED);
+  });
+
+  it('Does not set "gameWon" to "true" when some non-trap cells are unrevealed', function () {
+    
+    // Arrange
+
+    const state = fromJS({
+      board: [
+        [{ adjacentTrapCount: 1, isRevealed: false, isTrap: false }],
+        [{ adjacentTrapCount: 0, isRevealed: false, isTrap: true }],
+        [{ adjacentTrapCount: 1, isRevealed: false, isTrap: false }]
+      ],
+      gameLost: false,
+      gameWon: false
+    });
+
+    const action = actions.revealCellAt(0, 0);
+
+    // Act
+
+    const updated = reducer(state, action);
+
+    // Assert
+
+    expect(updated.get('gameLost')).to.be.false;
+    expect(updated.get('gameWon')).to.be.false;
+    expect(updated.get('timerState')).to.equal(timerStates.STARTED);
+  });
+
+  it('Sets "gameWon" to "true" when all non-trap cells are revealed', function () {
+    
+    // Arrange
+
+    const state = fromJS({
+      board: [
+        [{ adjacentTrapCount: 0, isRevealed: false, isTrap: false }],
+        [{ adjacentTrapCount: 1, isRevealed: false, isTrap: false }],
+        [{ adjacentTrapCount: 0, isRevealed: false, isTrap: true }]
+      ],
+      gameLost: false,
+      gameWon: false
+    });
+
+    const action = actions.revealCellAt(0, 0);
+
+    // Act
+
+    const updated = reducer(state, action);
+
+    // Assert
+
+    expect(updated.get('gameLost')).to.be.false;
+    expect(updated.get('gameWon')).to.be.true;
     expect(updated.get('timerState')).to.equal(timerStates.STOPPED);
   });
 

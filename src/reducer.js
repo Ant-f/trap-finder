@@ -6,7 +6,8 @@ import reveal from './helpers/cell-revealer';
 
 const defaultState = fromJS({
   board: generator.generateBoard(9, 9, 10),
-  gameLost: false
+  gameLost: false,
+  gameWon: false
 });
 
 /* eslint indent: 'off' */
@@ -20,14 +21,21 @@ export default (state = defaultState, action) => {
       if (isTrap) {
         return state.withMutations(s => s
           .set('gameLost', true)
-          .set('timerState', timerStates.STOPPED));  
+          .set('timerState', timerStates.STOPPED));
       }
 
       const updatedBoard = reveal(x, y, state.get('board'));
 
+      const isWon = updatedBoard.flatten(1)
+        .filter(c => !c.get('isTrap'))
+        .every(c => c.get('isRevealed'));
+
       const updatedState = state.withMutations(s => s
+        .set('gameWon', isWon)
         .set('board', updatedBoard)
-        .set('timerState', timerStates.STARTED));
+        .set('timerState', isWon
+          ? timerStates.STOPPED
+          : timerStates.STARTED));
       
       return updatedState;
     }
