@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as styles from '../../stylesheets/timer.scss';
 import * as timerStates from './timer-states';
 import getTime from '../helpers/time-provider';
 import PropTypes from 'prop-types';
@@ -95,7 +96,7 @@ class Timer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.timerText}>
         { `Time: ${this.state.elapsedTime}` }
       </div>
     );
