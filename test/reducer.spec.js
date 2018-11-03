@@ -99,6 +99,31 @@ describe('Reducer', function () {
     expect(updated.get('timerState')).to.equal(timerStates.STOPPED);
   });
 
+  it('Does not set "gameLost" to "true" when trying to reveal a flagged trap', function () {
+    
+    // Arrange
+
+    const state = fromJS({
+      board: [[{
+        isFlagged: true,
+        isTrap: true
+      }]],
+      gameLost: false,
+      timerState: timerStates.STARTED
+    });
+
+    const action = actions.revealCellAt(0, 0);
+
+    // Act
+
+    const updated = reducer(state, action);
+
+    // Assert
+
+    expect(updated.get('gameLost')).to.be.false;
+    expect(updated.get('timerState')).to.equal(timerStates.STARTED);
+  });
+
   it('Does not set "gameWon" to "true" when some non-trap cells are unrevealed', function () {
     
     // Arrange

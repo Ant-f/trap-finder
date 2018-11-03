@@ -16,6 +16,12 @@ export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.REVEAL_CELL: {
       const { x, y } = action.data;
+      const isFlagged = state.getIn(['board', x, y, 'isFlagged']);
+      
+      if (isFlagged) {
+        return state;
+      }
+
       const isTrap = state.getIn(['board', x, y, 'isTrap']);
 
       if (isTrap) {
