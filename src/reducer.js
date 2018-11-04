@@ -4,16 +4,33 @@ import * as timerStates from './components/timer-states';
 import generator from './helpers/board-generator';
 import reveal from './helpers/cell-revealer';
 
+const defaultHeight = 9;
+const defaultTrapCount = 10;
+const defaultWidth = 9;
+
 const defaultState = fromJS({
-  board: generator.generateBoard(9, 9, 10),
+  board: generator.generateBoard(defaultWidth, defaultHeight, defaultTrapCount),
+  defaultBoardHeight: defaultHeight,
+  defaultTrapCount: defaultTrapCount,
+  defaultBoardWidth: defaultWidth,
   gameLost: false,
-  gameWon: false
+  gameWon: false,
+  timerState: timerStates.RESET
 });
 
 /* eslint indent: 'off' */
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+    case actionTypes.NEW_GAME: {
+      const { width, height, trapCount } = action.data;
+
+      const newState =
+        defaultState.set('board', generator.generateBoard(width, height, trapCount));
+      
+      return newState;
+    }
+
     case actionTypes.REVEAL_CELL: {
       const { x, y } = action.data;
       const isFlagged = state.getIn(['board', x, y, 'isFlagged']);

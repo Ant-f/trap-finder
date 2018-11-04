@@ -39,14 +39,50 @@ describe('Reducer', function () {
 
     // Assert
 
-    const isGameLost = state.get('gameLost');
-    expect(isGameLost).to.be.false;
-
-    const isGameWon = state.get('gameWon');
-    expect(isGameWon).to.be.false;
+    expect(state.get('gameLost'), 'gameLost').to.be.false;
+    expect(state.get('gameWon'), 'gameWon').to.be.false;
+    expect(state.get('timerState'), 'timerState').to.equal(timerStates.RESET);
+    expect(state.get('defaultBoardHeight'), 'defaultBoardHeight').to.equal(9);
+    expect(state.get('defaultTrapCount'), 'defaultTrapCount').to.equal(10);
+    expect(state.get('defaultBoardWidth'), 'defaultBoardWidth').to.equal(9);
   });
 
-  describe('Toggle-flag action', function () {
+  describe('New-game action', function () {
+    it('Returns state for new game', function () {
+
+      // Arrange
+
+      const width = 7;
+      const height = 5;
+      const trapCount = 10;
+      const newBoard = 'new board';
+
+      const action = actions.newGame(width, height, trapCount);
+      const state = fromJS({});
+      const generateBoard = sinon.fake.returns(newBoard);
+
+      const reducerWithInjection = require('inject-loader!../src/reducer')({
+        './helpers/board-generator': { generateBoard }
+      }).default;
+
+      // Act
+
+      const updated = reducerWithInjection(state, action);
+
+      // Assert
+
+      // 1st call is generating default state
+      sinon.assert.calledWith(generateBoard.getCall(0), 9, 9, 10);
+      
+      sinon.assert.calledWith(generateBoard.getCall(1), width, height, trapCount);
+      expect(updated.get('board')).to.equal(newBoard);
+      expect(updated.get('gameLost')).to.be.false;
+      expect(updated.get('gameWon')).to.be.false;
+      expect(updated.get('timerState')).to.equal(timerStates.RESET);
+    });
+  });
+
+  describe('Reveal-cell action', function () {
     it('Reveals safe board cells', function () {
 
       // Arrange
