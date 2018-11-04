@@ -18,12 +18,16 @@ $cell-size: 4em;
   opacity: 0.2;
 }
 
-.flag {
+.overlay {
   position: absolute;
 }
 
 .revealed {
   background: rgb(165, 255, 137);
+}
+
+.small-image {
+  width: 1.5em;
 }
 
 .trap {

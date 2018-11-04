@@ -64,7 +64,16 @@ const GridCell = ({ adjacentTrapCount, isFlagged, isGameLost, isGameWon, isRevea
     }
     {
       isFlagged
-        ? <img className={styles.flag} src="images/red-flag.svg" />
+        ? <img
+          className={`${isGameLost && !isTrap ? styles.faded : null} ${styles.overlay}`}
+          src="images/red-flag.svg" />
+        : null
+    }
+    {
+      isGameLost && isFlagged && !isTrap
+        ? <img
+          className={`${styles.overlay} ${styles.smallImage}`}
+          src="images/red-cross.svg" />
         : null
     }
   </div>
