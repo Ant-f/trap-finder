@@ -25,6 +25,7 @@ const getWrapper = props => {
       isRevealed={props.isRevealed}
       isTrap={props.isTrap}
       revealCell={props.revealCell}
+      setRevealCellStatus={props.setRevealCellStatus}
       toggleFlag={props.toggleFlag} />);
 };
 
@@ -37,6 +38,7 @@ describe('<GridCell/>', function () {
     isRevealed: false,
     isTrap: false,
     revealCell: () => { },
+    setRevealCellStatus: () => { },
     toggleFlag: () => { }
   };
 
@@ -60,6 +62,30 @@ describe('<GridCell/>', function () {
     const wrapper = getWrapper(props);
     const image = wrapper.find(crossSelector);
     expect(image).to.have.lengthOf(0);
+  });
+
+  it('Sets state to indicate revealing a cell on mouse-down event', function () {
+    let isRevealingCell;
+
+    const wrapper = getWrapper({
+      ...props,
+      setRevealCellStatus: newValue => isRevealingCell = newValue
+    });
+
+    wrapper.find('div').simulate('mouseDown', {});
+    expect(isRevealingCell).to.be.true;
+  });
+
+  it('Sets state to indicate not revealing a cell on mouse-up event', function () {
+    let isRevealingCell;
+
+    const wrapper = getWrapper({
+      ...props,
+      setRevealCellStatus: newValue => isRevealingCell = newValue
+    });
+
+    wrapper.find('div').simulate('mouseUp', {});
+    expect(isRevealingCell).to.be.false;
   });
 
   describe('When the game is lost', function () {

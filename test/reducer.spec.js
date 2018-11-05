@@ -41,6 +41,7 @@ describe('Reducer', function () {
 
     expect(state.get('gameLost'), 'gameLost').to.be.false;
     expect(state.get('gameWon'), 'gameWon').to.be.false;
+    expect(state.get('isRevealingCell'), 'isRevealingCell').to.be.false;
     expect(state.get('timerState'), 'timerState').to.equal(timerStates.RESET);
     expect(state.get('defaultBoardHeight'), 'defaultBoardHeight').to.equal(9);
     expect(state.get('defaultTrapCount'), 'defaultTrapCount').to.equal(10);
@@ -213,6 +214,24 @@ describe('Reducer', function () {
       expect(updated.get('gameLost')).to.be.false;
       expect(updated.get('gameWon')).to.be.true;
       expect(updated.get('timerState')).to.equal(timerStates.STOPPED);
+    });
+  });
+
+  describe('Set-reveal-cell-status action', function () {
+    it('Sets isRevealingCell', function () {
+
+      // Arrange
+
+      const action = actions.setRevealCellStatus(true);
+      const state = fromJS({});
+
+      // Act
+
+      const updated = reducer(state, action);
+
+      // Assert
+
+      expect(updated.get('isRevealingCell')).to.be.true;
     });
   });
 

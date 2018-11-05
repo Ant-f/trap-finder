@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions/action-creators';
-import GridCell from '../components/grid-cell.jsx';
+import Smiley from '../components/smiley.jsx';
 
 export const mapDispatchToProps = dispatch => {
   return {
@@ -11,8 +11,10 @@ export const mapDispatchToProps = dispatch => {
 
 export const mapStateToProps = state => {
   return {
-    isGameWon: state.get('gameWon')
+    isGameLost: state.get('gameLost'),
+    isGameWon: state.get('gameWon'),
+    isRevealingCell: state.get('isRevealingCell'),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GridCell);
+export default connect(mapStateToProps, mapDispatchToProps)(Smiley);

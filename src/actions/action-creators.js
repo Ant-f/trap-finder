@@ -14,6 +14,13 @@ export const revealCellAt = (x, y) => {
   };
 };
 
+export const setRevealCellStatus = isRevealingCell => {
+  return {
+    type: actionTypes.SET_REVEAL_CELL_STATUS,
+    data: { isRevealingCell }
+  };
+};
+
 export const toggleFlagAt = (x, y) => {
   return {
     type: actionTypes.TOGGLE_FLAG,

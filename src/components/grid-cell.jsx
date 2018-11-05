@@ -45,10 +45,12 @@ const onClick = (e, isGameLost, isGameWon, revealCell, toggleFlag) => {
   }
 };
 
-const GridCell = ({ adjacentTrapCount, isFlagged, isGameLost, isGameWon, isRevealed, isTrap, revealCell, toggleFlag }) => (
+const GridCell = ({ adjacentTrapCount, isFlagged, isGameLost, isGameWon, isRevealed, isTrap, revealCell, setRevealCellStatus, toggleFlag }) => (
   <div
     className={getClasses(styles, isGameLost, isRevealed, isTrap)}
-    onClick={e => { onClick(e, isGameLost, isGameWon, revealCell, toggleFlag); }}>
+    onClick={e => { onClick(e, isGameLost, isGameWon, revealCell, toggleFlag); }}
+    onMouseDown={() => setRevealCellStatus(true)}
+    onMouseUp={() => setRevealCellStatus(false)}>
     {
       isTrap
         ? isGameLost
@@ -87,6 +89,7 @@ GridCell.propTypes = {
   isRevealed: PropTypes.bool.isRequired,
   isTrap: PropTypes.bool.isRequired,
   revealCell: PropTypes.func.isRequired,
+  setRevealCellStatus: PropTypes.func.isRequired,
   toggleFlag: PropTypes.func.isRequired
 };
 

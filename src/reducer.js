@@ -15,6 +15,7 @@ const defaultState = fromJS({
   defaultBoardWidth: defaultWidth,
   gameLost: false,
   gameWon: false,
+  isRevealingCell: false,
   timerState: timerStates.RESET
 });
 
@@ -61,6 +62,10 @@ export default (state = defaultState, action) => {
           : timerStates.STARTED));
       
       return updatedState;
+    }
+
+    case actionTypes.SET_REVEAL_CELL_STATUS: {
+      return state.set('isRevealingCell', action.data.isRevealingCell);
     }
 
     case actionTypes.TOGGLE_FLAG: {

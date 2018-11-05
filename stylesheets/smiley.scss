@@ -1,0 +1,23 @@
+$size: 5.5em;
+
+.container {
+  align-items: center;
+  display: flex;
+  height: $size;
+  justify-content: center;
+  position: relative;
+  width: $size;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.hideable {
+  transition: opacity 0.1s;
+}
+
+.image {
+  position: absolute;
+  height: 5em;
+};
