@@ -88,6 +88,16 @@ describe('<GridCell/>', function () {
     expect(isRevealingCell).to.be.false;
   });
 
+  it('Does not set state relating to revealing cell when setting flag', function () {
+    const wrapper = getWrapper({
+      ...props,
+      setRevealCellStatus: () => { throw new Error('State update unexpected'); }
+    });
+
+    wrapper.find('div').simulate('mouseDown', { ctrlKey: true });
+    wrapper.find('div').simulate('mouseUp', { ctrlKey: true });
+  });
+
   describe('When the game is lost', function () {
     this.beforeEach(function () {
       props = { ...props, isGameLost: true };
