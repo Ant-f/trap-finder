@@ -36,7 +36,7 @@ describe('<Timer />', function () {
   it('Displays elapsed time', function () {
     const wrapper = Enzyme.shallow(<Timer />);
     wrapper.setState({ elapsedTime: '00:01:43' });
-    expect(wrapper.text()).to.equal('Time: 00:01:43');
+    expect(wrapper.text()).to.equal('00:01:43');
   });
 });
 

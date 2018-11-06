@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as styles from '../../stylesheets/new-game.scss';
 import PropTypes from 'prop-types';
 
 class NewGame extends React.PureComponent {
@@ -13,26 +14,38 @@ class NewGame extends React.PureComponent {
   
   render() {
     return (
-      <div>
+      <div className={styles.componentRoot}>
         <label>
-          Width
+          <span className={styles.labelText}>
+            Width
+          </span>
+          
           <input
+            className={styles.numberInput}
             onChange={e => { this.setState({ width: e.target.value }); }}
             type="input"
             value={this.state.width} />
         </label>
 
         <label>
-          Height
+          <span className={styles.labelText}>
+            Height
+          </span>
+
           <input
+            className={styles.numberInput}
             onChange={e => { this.setState({ height: e.target.value }); }}
             type="input"
             value={this.state.height} />
         </label>
 
         <label>
-          Traps
+          <span className={styles.labelText}>
+            Traps
+          </span>
+          
           <input
+            className={styles.numberInput}
             onChange={e => { this.setState({ trapCount: e.target.value }); }}
             type="input"
             value={this.state.trapCount} />

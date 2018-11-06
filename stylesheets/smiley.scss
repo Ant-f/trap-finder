@@ -1,4 +1,4 @@
-$size: 5.5em;
+$size: 2.2em;
 
 .container {
   align-items: center;
@@ -19,5 +19,5 @@ $size: 5.5em;
 
 .image {
   position: absolute;
-  height: 5em;
+  height: $size - 0.5em;
 };
