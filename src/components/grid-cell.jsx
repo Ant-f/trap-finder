@@ -60,30 +60,39 @@ const GridCell = ({ adjacentTrapCount, isFlagged, isGameLost, isGameWon, isRevea
     {
       isTrap
         ? isGameLost
-          ? <img className={isFlagged ? styles.faded : null} src="images/bear-trap.svg" />
+          ? <img className={`
+            ${isFlagged ? styles.faded : null}
+            ${styles.image}`}
+          src="images/bear-trap.svg" />
           : null
         : isRevealed && adjacentTrapCount > 0
-          ? <span className={`
+          ? <div className={`
               ${countStyles.trapCount}
               ${countStyles[countColours[adjacentTrapCount]]}`}>
             {adjacentTrapCount}
-          </span>
+          </div>
           : null
     }
     {
       isFlagged
         ? <img
-          className={`${isGameLost && !isTrap ? styles.faded : null} ${styles.overlay}`}
+          className={`
+            ${isGameLost && !isTrap ? styles.faded : null}
+            ${styles.image}
+            ${styles.imageOverlay}`}
           src="images/red-flag.svg" />
         : null
     }
     {
       isGameLost && isFlagged && !isTrap
         ? <img
-          className={`${styles.overlay} ${styles.smallImage}`}
+          className={`
+            ${styles.imageOverlay}
+            ${styles.smallImage}`}
           src="images/red-cross.svg" />
         : null
     }
+    <div className={styles.cellHighlight} />
   </div>
 );
 

@@ -10,6 +10,19 @@ $cell-size: 4em;
   width: $cell-size;
 }
 
+.cell-highlight {
+  position: absolute;
+  background: white;
+  height: $cell-size;
+  opacity: 0;
+  transition: opacity 0.2s;
+  width: $cell-size;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
 .column-set {
   display: flex;
 }
@@ -18,7 +31,11 @@ $cell-size: 4em;
   opacity: 0.2;
 }
 
-.overlay {
+.image {
+  width: 4em;
+}
+
+.image-overlay {
   position: absolute;
 }
 
@@ -36,8 +53,4 @@ $cell-size: 4em;
 
 .unrevealed {
   background: rgb(223, 223, 223);
-}
-
-img {
-  width: 4em;
 }

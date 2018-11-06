@@ -7,7 +7,9 @@ const remainingTraps = ({ totalTrapCount, flaggedTrapCount }) => (
     {
       [...Array(totalTrapCount).keys()].map(i => {
         return <img
-          className={i < flaggedTrapCount ? null : styles.faded}
+          className={`
+            ${i < flaggedTrapCount ? null : styles.faded}
+            ${styles.image}`}
           key={i}
           src="images/bear-trap.svg" />;
       })

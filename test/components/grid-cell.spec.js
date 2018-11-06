@@ -5,14 +5,17 @@ import * as React from 'react';
 import Enzyme from '../root-hooks.spec.js';
 
 const styles = {
+  cell: 'cell',
   faded: 'faded',
   trap: 'trap',
+  trapCount: 'trapCount',
   revealed: 'revealed',
   unrevealed: 'unrevealed'
 };
 
 const GridCell = require('inject-loader!../../src/components/grid-cell.jsx')({
-  '../../stylesheets/trap-grid.scss': styles
+  '../../stylesheets/trap-grid.scss': styles,
+  '../../stylesheets/trap-count.scss': styles
 }).default;
 
 const getWrapper = props => {
@@ -72,7 +75,7 @@ describe('<GridCell/>', function () {
       setRevealCellStatus: newValue => isRevealingCell = newValue
     });
 
-    wrapper.find('div').simulate('mouseDown', {});
+    wrapper.find(`.${styles.cell}`).simulate('mouseDown', {});
     expect(isRevealingCell).to.be.true;
   });
 
@@ -84,7 +87,7 @@ describe('<GridCell/>', function () {
       setRevealCellStatus: newValue => isRevealingCell = newValue
     });
 
-    wrapper.find('div').simulate('mouseUp', {});
+    wrapper.find(`.${styles.cell}`).simulate('mouseUp', {});
     expect(isRevealingCell).to.be.false;
   });
 
@@ -94,8 +97,8 @@ describe('<GridCell/>', function () {
       setRevealCellStatus: () => { throw new Error('State update unexpected'); }
     });
 
-    wrapper.find('div').simulate('mouseDown', { ctrlKey: true });
-    wrapper.find('div').simulate('mouseUp', { ctrlKey: true });
+    wrapper.find(`.${styles.cell}`).simulate('mouseDown', { ctrlKey: true });
+    wrapper.find(`.${styles.cell}`).simulate('mouseUp', { ctrlKey: true });
   });
 
   describe('When the game is lost', function () {
@@ -142,8 +145,8 @@ describe('<GridCell/>', function () {
         toggleFlag: () => { throw new Error('Flag toggle unexpected'); }
       });
 
-      wrapper.find('div').simulate('click', {});
-      wrapper.find('div').simulate('click', { ctrlKey: true });
+      wrapper.find(`.${styles.cell}`).simulate('click', {});
+      wrapper.find(`.${styles.cell}`).simulate('click', { ctrlKey: true });
     });
 
     it('Shows a cross over a flag if flagged and trap is not present', function () {
@@ -205,7 +208,7 @@ describe('<GridCell/>', function () {
           toggleFlag: () => { throw new Error('Flag toggle unexpected'); }
         });
 
-        wrapper.find('div').simulate('click', {});
+        wrapper.find(`.${styles.cell}`).simulate('click', {});
         expect(cellRevealed).to.be.true;
       });
       
@@ -218,7 +221,7 @@ describe('<GridCell/>', function () {
           toggleFlag: () => { flagToggled = true; }
         });
 
-        wrapper.find('div').simulate('click', { ctrlKey: true });
+        wrapper.find(`.${styles.cell}`).simulate('click', { ctrlKey: true });
         expect(flagToggled).to.be.true;
       });
 
@@ -236,8 +239,8 @@ describe('<GridCell/>', function () {
 
       it('Shows adjacent trap count', function () {
         const wrapper = getWrapper({ ...props, adjacentTrapCount: 3, isTrap: false });
-        const span = wrapper.find('span');
-        const trapCount = Number(span.text().trim());
+        const element = wrapper.find(`.${styles.trapCount}`);
+        const trapCount = Number(element.text().trim());
         expect(Number.isInteger(trapCount)).to.be.true;
       });
         
@@ -267,8 +270,8 @@ describe('<GridCell/>', function () {
         toggleFlag: () => { throw new Error('Flag toggle unexpected'); }
       });
 
-      wrapper.find('div').simulate('click', {});
-      wrapper.find('div').simulate('click', { ctrlKey: true });
+      wrapper.find(`.${styles.cell}`).simulate('click', {});
+      wrapper.find(`.${styles.cell}`).simulate('click', { ctrlKey: true });
     });
   });
 });
