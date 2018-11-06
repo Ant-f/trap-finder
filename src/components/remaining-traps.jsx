@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as styles from '../../stylesheets/remaining-traps.scss';
 import PropTypes from 'prop-types';
 
-const remainingTraps = ({ totalTrapCount, flaggedTrapCount }) => (
+const RemainingTraps = ({ totalTrapCount, flaggedTrapCount }) => (
   <div>
     {
       [...Array(totalTrapCount).keys()].map(i => {
@@ -16,9 +16,9 @@ const remainingTraps = ({ totalTrapCount, flaggedTrapCount }) => (
     }
   </div>);
 
-remainingTraps.propTypes = {
+RemainingTraps.propTypes = {
   totalTrapCount: PropTypes.number.isRequired,
   flaggedTrapCount: PropTypes.number.isRequired
 };
 
-export default remainingTraps;
+export default RemainingTraps;

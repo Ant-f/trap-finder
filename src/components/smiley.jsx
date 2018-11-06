@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as styles from '../../stylesheets/smiley.scss';
 import PropTypes from 'prop-types';
 
-const smiley = ({ isGameLost, isGameWon, isRevealingCell }) => (
+const Smiley = ({ isGameLost, isGameWon, isRevealingCell }) => (
   <div className={styles.container}>
     <img className={styles.image} src="images/smiley-base.svg" />
       
@@ -35,10 +35,10 @@ const smiley = ({ isGameLost, isGameWon, isRevealingCell }) => (
       src="images/lose-face.svg" />
   </div>);
 
-smiley.propTypes = {
+Smiley.propTypes = {
   isGameLost: PropTypes.bool.isRequired,
   isGameWon: PropTypes.bool.isRequired,
   isRevealingCell: PropTypes.bool.isRequired
 };
 
-export default smiley;
+export default Smiley;
