@@ -89,7 +89,7 @@ class Timer extends React.Component {
   reset() {
     this.setState(state => {
       if (state.timerState !== timerStates.RESET) {
-        this.setState(defaultState);
+        return defaultState;
       }
     });
   }

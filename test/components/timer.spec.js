@@ -250,26 +250,16 @@ describe('Timer state', function () {
     expect(timer.state.elapsedTime).to.equal('00:00:00');
   });
 
-  it('has 00:00:00 as elasped time after reset', function () {
+  it('Resets timer state when reset', function () {
       
-    // Arrange, Act
+    // Arrange
 
     const timer = getTimer([1000]);
     timer.start();
     timer.update();
-  
-    // Assert
 
-    timer.reset();
-  
-    expect(timer.state.elapsedTime).to.equal('00:00:00');
-  });
-
-  it('Sets timer-state to be reset when reset', function () {
-      
-    // Arrange
-
-    const timer = getTimer([]);
+    const setState = sinon.fake(timer.setState);
+    sinon.replace(timer, 'setState', setState);
     
     // Act
     
@@ -277,6 +267,8 @@ describe('Timer state', function () {
 
     // Assert
 
+    expect(setState).to.have.been.calledOnce;
+    expect(timer.state.elapsedTime).to.equal('00:00:00');
     expect(timer.state.timerState).to.equal(timerStates.RESET);
   });
 
