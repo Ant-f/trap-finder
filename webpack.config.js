@@ -51,13 +51,12 @@ module.exports = {
         }
       }]
     }, {
-      test: /\.(svg)$/i,
+      test: /\.(jpg|svg)$/i,
       use: [{
         loader: 'file-loader',
         options: {
           name: '[hash].[ext]',
-          outputPath: 'images/',
-          publicPath: '../'
+          outputPath: 'images/'
         }
       }, {
         loader: 'image-webpack-loader'
