@@ -24,32 +24,42 @@ body {
   z-index: 2;
 }
 
-.game-content {
+.new-game {
+  @include set-font-family();
+  @include emboss();
+  background: $header-background;
+  border-bottom: #00000028;
+  border-bottom-width: $header-border-width;
+  border-bottom-style: solid;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+}
+
+.page-body {
   align-items: center;
   background-image: url('../images/background.jpg');
   background-size: cover;
   display: flex;
+  flex-direction: column;
   height: 100%;
   justify-content: center;
   position: absolute;
   width: 100%;
   z-index: 1;
-}
 
-.new-game {
-  @include set-font-family();
-  background: $header-background;
-  border-bottom: #00000028;
-  border-bottom-width: $header-border-width;
-  border-bottom-style: solid;
-  color: white;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  text-shadow: 0.08em 0.08em 0.2em black;
-  top: 0;
-  width: 100%;
-  z-index: 3;
+  h1, a {
+    @include set-font-family();
+    @include emboss();
+    margin: 0;
+  }
+  
+  a {
+    margin: 0.2em 0;
+  }
 }
 
 .timer-tray {

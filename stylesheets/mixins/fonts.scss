@@ -1,3 +1,8 @@
+@mixin emboss() {
+  color: #FFFFFF80;
+  text-shadow: 0 0 0.4em #00000090;
+}
+
 @mixin set-font-family() {
   font-family: 'Share Tech Mono', monospace;
 }

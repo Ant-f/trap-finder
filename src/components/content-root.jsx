@@ -12,7 +12,9 @@ const ContentRoot = () => (
       <NewGame />
     </div>
     
-    <div className={styles.gameContent}>
+    <div className={styles.pageBody}>
+      <h1>Trap Finder</h1>
+      <a href="https://github.com/Ant-f/trap-finder">Copyright © 2018 Anthony Fung</a>
       <TrapGrid />
     </div>
 
