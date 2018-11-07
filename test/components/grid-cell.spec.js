@@ -15,7 +15,7 @@ const styles = {
 
 const GridCell = require('inject-loader!../../src/components/grid-cell.jsx')({
   '../../stylesheets/trap-grid.scss': styles,
-  '../../stylesheets/trap-count.scss': styles
+  '../../stylesheets/trap-count-colours.scss': styles
 }).default;
 
 const getWrapper = props => {
