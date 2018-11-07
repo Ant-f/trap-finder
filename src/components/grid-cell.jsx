@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as styles from '../../stylesheets/trap-grid.scss';
-import * as countStyles from '../../stylesheets/trap-count.scss';
+import * as colours from '../../stylesheets/trap-count-colours.scss';
 import PropTypes from 'prop-types';
 
-const countColours = {
+const colourNames = {
   1: 'one',
   2: 'two',
   3: 'three',
@@ -67,8 +67,8 @@ const GridCell = ({ adjacentTrapCount, isFlagged, isGameLost, isGameWon, isRevea
           : null
         : isRevealed && adjacentTrapCount > 0
           ? <div className={`
-              ${countStyles.trapCount}
-              ${countStyles[countColours[adjacentTrapCount]]}`}>
+              ${styles.trapCount}
+              ${colours[colourNames[adjacentTrapCount]]}`}>
             {adjacentTrapCount}
           </div>
           : null

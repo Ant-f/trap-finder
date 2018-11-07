@@ -1,9 +1,8 @@
-$border-width: 0.1em;
 $cell-size: 4em;
 
 .cell {
   align-items: center;
-  border: $border-width solid rgb(124, 124, 124);
+  border: $cell-size * 0.025 solid rgb(124, 124, 124);
   display: flex;
   justify-content: center;
   height: $cell-size;
@@ -15,11 +14,11 @@ $cell-size: 4em;
   background: white;
   height: $cell-size;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.1s;
   width: $cell-size;
 
   &:hover {
-    opacity: 0.5;
+    opacity: 0.4;
   }
 }
 
@@ -32,7 +31,7 @@ $cell-size: 4em;
 }
 
 .image {
-  width: 4em;
+  width: $cell-size;
 }
 
 .image-overlay {
@@ -44,11 +43,16 @@ $cell-size: 4em;
 }
 
 .small-image {
-  width: 1.5em;
+  width: $cell-size * 0.375;
 }
 
 .trap {
   background: rgb(255, 197, 197);
+}
+
+.trapCount {
+  font-size: $cell-size * 0.4;
+  font-weight: bold;
 }
 
 .unrevealed {
