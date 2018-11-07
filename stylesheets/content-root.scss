@@ -2,8 +2,6 @@
 
 $header-background: #FFFFFF20;
 $header-border-width: 0.2em;
-$timer-highlight: rgb(66, 66, 66);
-$timer-lowlight: black;
 
 body {
   margin: 0;
@@ -65,12 +63,9 @@ body {
 .timer-tray {
   align-items: center;
   background: rgb(44, 44, 44);
-  border-bottom-color: $timer-highlight;
-  border-left-color: $timer-lowlight;
-  border-right-color: $timer-highlight;
-  border-top-color: $timer-lowlight;
+  border-color: rgb(66, 66, 66);
   border-radius: 4%;
-  border-style: solid;
+  border-style: inset;
   border-width: 0.4em;
   display: flex;
   margin-right: 0.2em;

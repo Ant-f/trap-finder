@@ -2,7 +2,7 @@ $cell-size: 4em;
 
 .cell {
   align-items: center;
-  border: $cell-size * 0.025 solid rgb(124, 124, 124);
+  border: $cell-size * 0.025 inset rgb(211, 211, 211);
   display: flex;
   justify-content: center;
   height: $cell-size;
