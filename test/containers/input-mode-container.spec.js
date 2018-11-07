@@ -1,7 +1,7 @@
 /* global describe, it, require */
 
 import { fromJS } from 'immutable';
-import { mapStateToProps } from '../../src/containers/grid-cell-container';
+import { mapStateToProps } from '../../src/containers/input-mode-container';
 import * as inputModes from '../../src/input-modes';
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
@@ -9,17 +9,19 @@ import sinonChai from 'sinon-chai';
 
 chai.use(sinonChai);
 
-describe('Grid cell container', function () {
+describe('input mode container', function () {
   it('Maps dispatch to props', function () {
 
     // Arrange
 
+    const newValue = 'new value';
+
     const actions = {
-      setRevealCellStatus: sinon.fake()
+      updateInputMode: sinon.fake()
     };
 
     const { mapDispatchToProps } =
-      require('inject-loader!../../src/containers/grid-cell-container')({
+      require('inject-loader!../../src/containers/input-mode-container')({
         '../actions/action-creators': actions
       });
 
@@ -27,11 +29,11 @@ describe('Grid cell container', function () {
 
     // Act
 
-    mapDispatchToProps(dispatch).setRevealCellStatus(true);
+    mapDispatchToProps(dispatch).updateInputMode(newValue);
 
     // Assert
 
-    expect(actions.setRevealCellStatus).to.have.been.calledOnceWith(true);
+    expect(actions.updateInputMode).to.have.been.calledOnceWith(newValue);
   });
 
   describe('Map state to props', function () {
@@ -71,25 +73,6 @@ describe('Grid cell container', function () {
       // Assert
 
       expect(isFlagInput).to.be.false;
-    });
-
-    it('Maps "isGameWon"', function () {
-
-      // Arrange
-
-      const state = {
-        gameWon: true
-      };
-
-      const immutableState = fromJS(state);
-
-      // Act
-    
-      const { isGameWon } = mapStateToProps(immutableState);
-
-      // Assert
-
-      expect(isGameWon).to.equal(state.gameWon);
     });
   });
 });

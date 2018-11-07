@@ -3,6 +3,7 @@
 import { fromJS, List } from 'immutable';
 import * as actions from '../src/actions/action-creators';
 import * as timerStates from '../src/components/timer-states';
+import * as inputModes from '../src/input-modes';
 import chai, { expect } from 'chai';
 import reducer from '../src/reducer';
 import sinon from 'sinon';
@@ -39,13 +40,14 @@ describe('Reducer', function () {
 
     // Assert
 
+    expect(state.get('defaultBoardHeight'), 'defaultBoardHeight').to.equal(9);
+    expect(state.get('defaultBoardWidth'), 'defaultBoardWidth').to.equal(9);
+    expect(state.get('defaultTrapCount'), 'defaultTrapCount').to.equal(10);
     expect(state.get('gameLost'), 'gameLost').to.be.false;
     expect(state.get('gameWon'), 'gameWon').to.be.false;
+    expect(state.get('inputMode'), 'inputMode').to.equal(inputModes.EXPLORE);
     expect(state.get('isRevealingCell'), 'isRevealingCell').to.be.false;
     expect(state.get('timerState'), 'timerState').to.equal(timerStates.RESET);
-    expect(state.get('defaultBoardHeight'), 'defaultBoardHeight').to.equal(9);
-    expect(state.get('defaultTrapCount'), 'defaultTrapCount').to.equal(10);
-    expect(state.get('defaultBoardWidth'), 'defaultBoardWidth').to.equal(9);
   });
 
   describe('New-game action', function () {
@@ -297,6 +299,24 @@ describe('Reducer', function () {
       // Assert
 
       expect(updated.getIn(['board', 0, 0, 'isFlagged'])).to.be.false;
+    });
+  });
+
+  describe('Update-input-mode action', function () {
+    it('Updates state to given value', function () {
+
+      // Arrange
+
+      const newValue = 'new value';
+      const action = actions.updateInputMode(newValue);
+
+      // Act
+
+      const updated = reducer(undefined, action);
+
+      // Assert
+      
+      expect(updated.get('inputMode')).to.equal(newValue);
     });
   });
 });

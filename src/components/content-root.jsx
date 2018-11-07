@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as styles from '../../stylesheets/content-root.scss';
+import InputMode from '../containers/input-mode-container';
 import NewGame from '../containers/new-game-container';
 import RemainingTraps from '../containers/remaining-traps-container';
 import Smiley from '../containers/smiley-container';
@@ -19,6 +20,7 @@ const ContentRoot = () => (
     </div>
 
     <div className={styles.footer}>
+      <InputMode />
       <RemainingTraps />
       <div className={styles.timerTray}>
         <Timer />

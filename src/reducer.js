@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import * as actionTypes from './actions/action-types';
+import * as inputModes from './input-modes';
 import * as timerStates from './components/timer-states';
 import generator from './helpers/board-generator';
 import reveal from './helpers/cell-revealer';
@@ -15,6 +16,7 @@ const defaultState = fromJS({
   defaultBoardWidth: defaultWidth,
   gameLost: false,
   gameWon: false,
+  inputMode: inputModes.EXPLORE,
   isRevealingCell: false,
   timerState: timerStates.RESET
 });
@@ -83,6 +85,10 @@ export default (state = defaultState, action) => {
         .set('timerState', timerStates.STARTED));
       
       return updated;
+    }
+      
+    case actionTypes.UPDATE_INPUT_MODE: {
+      return state.set('inputMode', action.data.mode);
     }
 
     default: {

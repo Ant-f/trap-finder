@@ -27,3 +27,10 @@ export const toggleFlagAt = (x, y) => {
     data: { x, y }
   };
 };
+
+export const updateInputMode = mode => {
+  return {
+    type: actionTypes.UPDATE_INPUT_MODE,
+    data: { mode }
+  };
+};

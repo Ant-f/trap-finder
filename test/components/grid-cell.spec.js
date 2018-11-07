@@ -22,6 +22,7 @@ const getWrapper = props => {
   return Enzyme.shallow(
     <GridCell
       adjacentTrapCount={props.adjacentTrapCount}
+      isFlagInput={props.isFlagInput}
       isFlagged={props.isFlagged}
       isGameLost={props.isGameLost}
       isGameWon={props.isGameWon}
@@ -35,6 +36,7 @@ const getWrapper = props => {
 describe('<GridCell/>', function () {
   let props = {
     adjacentTrapCount: 0,
+    isFlagInput: false,
     isFlagged: false,
     isGameLost: false,
     isGameWon: false,
@@ -222,6 +224,20 @@ describe('<GridCell/>', function () {
         });
 
         wrapper.find(`.${styles.cell}`).simulate('click', { ctrlKey: true });
+        expect(flagToggled).to.be.true;
+      });
+
+      it('Toggles flag when clicked and "isFlagInput" is true', function () {
+        let flagToggled = false;
+
+        const wrapper = getWrapper({
+          ...props,
+          isFlagInput: true,
+          revealCell: () => { throw new Error('Cell reveal unexpected'); },
+          toggleFlag: () => { flagToggled = true; }
+        });
+
+        wrapper.find(`.${styles.cell}`).simulate('click', {});
         expect(flagToggled).to.be.true;
       });
 

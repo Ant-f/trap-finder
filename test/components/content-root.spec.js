@@ -11,6 +11,7 @@ describe('<ContentRoot />', function () {
 
     expect(wrapper.find('Connect(NewGame)'), 'NewGame').to.have.lengthOf(1);
     expect(wrapper.find('Connect(TrapGrid)'), 'TrapGrid').to.have.lengthOf(1);
+    expect(wrapper.find('Connect(InputMode)'), 'InputMode').to.have.lengthOf(1);
     expect(wrapper.find('Connect(RemainingTraps)'), 'RemainingTraps').to.have.lengthOf(1);
     expect(wrapper.find('Connect(Timer)'), 'Timer').to.have.lengthOf(1);
     expect(wrapper.find('Connect(Smiley)'), 'Smiley').to.have.lengthOf(1);
