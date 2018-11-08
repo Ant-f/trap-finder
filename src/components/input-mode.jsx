@@ -12,7 +12,10 @@ const updateMode = (e, updateInputMode) => {
 };
 
 const InputMode = ({ isFlagInput, updateInputMode }) => (
-  <label className={styles.toggleButton}>
+  <label
+    className={styles.toggleButton}
+    title="Switch between revealing squares/setting flags. Ctrl+click also sets a flag">
+
     <input
       checked={isFlagInput}
       onChange={e => { updateMode(e, updateInputMode); }}

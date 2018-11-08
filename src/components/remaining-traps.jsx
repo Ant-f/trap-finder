@@ -3,7 +3,7 @@ import * as styles from '../../stylesheets/remaining-traps.scss';
 import PropTypes from 'prop-types';
 
 const RemainingTraps = ({ totalTrapCount, flaggedTrapCount }) => (
-  <div>
+  <div title="Not yet found traps">
     {
       [...Array(totalTrapCount).keys()].map(i => {
         return <img

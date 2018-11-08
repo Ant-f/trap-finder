@@ -96,7 +96,7 @@ class Timer extends React.Component {
 
   render() {
     return (
-      <div className={styles.timer}>
+      <div className={styles.timer} title="Elapsed time">
         {this.state.elapsedTime}
       </div>
     );
