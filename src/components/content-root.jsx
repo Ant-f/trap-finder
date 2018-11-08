@@ -20,8 +20,10 @@ const ContentRoot = () => (
     </div>
 
     <div className={styles.footer}>
-      <InputMode />
-      <RemainingTraps />
+      <div className={styles.trapTray}>
+        <InputMode />
+        <RemainingTraps />
+      </div>
       <div className={styles.timerTray}>
         <Timer />
         <Smiley />

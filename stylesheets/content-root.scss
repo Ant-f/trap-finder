@@ -71,3 +71,12 @@ body {
   margin-right: 0.2em;
   padding: 0.2em 0.5em;
 }
+
+.trap-tray {
+  align-items: center;
+  display: flex;
+
+  img {
+    width: 2.5em;
+  }
+}
