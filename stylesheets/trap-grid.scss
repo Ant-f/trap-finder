@@ -30,6 +30,10 @@ $cell-size: 4em;
   opacity: 0.2;
 }
 
+.flagged {
+  background: rgb(164, 195, 253);
+}
+
 .image {
   width: $cell-size;
 }

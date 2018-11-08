@@ -7,6 +7,7 @@ import Enzyme from '../root-hooks.spec.js';
 const styles = {
   cell: 'cell',
   faded: 'faded',
+  flagged: 'flagged',
   trap: 'trap',
   trapCount: 'trapCount',
   revealed: 'revealed',
@@ -122,10 +123,16 @@ describe('<GridCell/>', function () {
       expect(spans).to.have.lengthOf(0);
     });
 
-    it('Has "trap" class when is trap', function () {
-      const wrapper = getWrapper({ ...props, isTrap: true });
+    it('Has "trap" class when is trap and not flagged', function () {
+      const wrapper = getWrapper({ ...props, isFlagged: false, isTrap: true });
       const root = wrapper.first();
       expect(root.hasClass(styles.trap)).to.be.true;
+    });
+
+    it('has "flagged" class when is trap and flagged', function () {
+      const wrapper = getWrapper({ ...props, isFlagged: true, isTrap: true });
+      const root = wrapper.first();
+      expect(root.hasClass(styles.flagged)).to.be.true;
     });
 
     it('Has "unrevealed" class when is not revealed', function () {
@@ -241,10 +248,16 @@ describe('<GridCell/>', function () {
         expect(flagToggled).to.be.true;
       });
 
-      it('has "unrevealed" class when is not revealed', function () {
-        const wrapper = getWrapper({ ...props, isRevealed: false });
+      it('has "unrevealed" class when is not revealed and not flagged', function () {
+        const wrapper = getWrapper({ ...props, isFlagged: false, isRevealed: false });
         const root = wrapper.first();
         expect(root.hasClass(styles.unrevealed)).to.be.true;
+      });
+
+      it('has "flagged" class when is not revealed and flagged', function () {
+        const wrapper = getWrapper({ ...props, isFlagged: true, isRevealed: false });
+        const root = wrapper.first();
+        expect(root.hasClass(styles.flagged)).to.be.true;
       });
     });
 

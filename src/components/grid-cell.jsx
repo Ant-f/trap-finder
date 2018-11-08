@@ -14,22 +14,32 @@ const colourNames = {
   8: 'eight'
 };
 
-const getClasses = (classNames, isGameLost, isRevealed, isTrap) => {
+const getClasses = (isFlagged, isGameLost, isRevealed, isTrap) => {
   let modifier;
 
   if (isGameLost && isTrap) {
-    modifier = classNames.trap;
+    if (isFlagged) {
+      modifier = styles.flagged;
+    }
+    else {
+      modifier = styles.trap;
+    }
   }
   else {
     if (isRevealed) {
-      modifier = classNames.revealed;
+      modifier = styles.revealed;
     }
     else {
-      modifier = classNames.unrevealed;
+      if (isFlagged) {
+        modifier = styles.flagged;
+      }
+      else {
+        modifier = styles.unrevealed;
+      }
     }
   }
 
-  return `${classNames.cell} ${modifier}`;
+  return `${styles.cell} ${modifier}`;
 };
 
 const onClick = (e, isFlagInput, isGameLost, isGameWon, revealCell, toggleFlag) => {
@@ -53,7 +63,7 @@ const updateRevealCellStatus = (e, newValue, setRevealCellStatus) => {
 
 const GridCell = ({ adjacentTrapCount, isFlagInput, isFlagged, isGameLost, isGameWon, isRevealed, isTrap, revealCell, setRevealCellStatus, toggleFlag }) => (
   <div
-    className={getClasses(styles, isGameLost, isRevealed, isTrap)}
+    className={getClasses(isFlagged, isGameLost, isRevealed, isTrap)}
     onClick={e => { onClick(e, isFlagInput, isGameLost, isGameWon, revealCell, toggleFlag); }}
     onMouseDown={e => updateRevealCellStatus(e, true, setRevealCellStatus)}
     onMouseUp={e => updateRevealCellStatus(e, false, setRevealCellStatus)}>
