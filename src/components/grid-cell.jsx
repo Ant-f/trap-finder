@@ -18,24 +18,18 @@ const getClasses = (isFlagged, isGameLost, isRevealed, isTrap) => {
   let modifier;
 
   if (isGameLost && isTrap) {
-    if (isFlagged) {
-      modifier = styles.flagged;
-    }
-    else {
-      modifier = styles.trap;
-    }
+    modifier = isFlagged
+      ? styles.flagged
+      : styles.trap;
   }
   else {
     if (isRevealed) {
       modifier = styles.revealed;
     }
     else {
-      if (isFlagged) {
-        modifier = styles.flagged;
-      }
-      else {
-        modifier = styles.unrevealed;
-      }
+      modifier = isFlagged
+        ? styles.flagged
+        : styles.unrevealed;
     }
   }
 
@@ -64,7 +58,7 @@ const updateRevealCellStatus = (e, newValue, setRevealCellStatus) => {
 const GridCell = ({ adjacentTrapCount, isFlagInput, isFlagged, isGameLost, isGameWon, isRevealed, isTrap, revealCell, setRevealCellStatus, toggleFlag }) => (
   <div
     className={getClasses(isFlagged, isGameLost, isRevealed, isTrap)}
-    onClick={e => { onClick(e, isFlagInput, isGameLost, isGameWon, revealCell, toggleFlag); }}
+    onClick={e => onClick(e, isFlagInput, isGameLost, isGameWon, revealCell, toggleFlag)}
     onMouseDown={e => updateRevealCellStatus(e, true, setRevealCellStatus)}
     onMouseUp={e => updateRevealCellStatus(e, false, setRevealCellStatus)}>
     {
