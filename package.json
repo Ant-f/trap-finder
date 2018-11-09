@@ -1,6 +1,6 @@
 {
   "name": "trap-finder",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Game based on a well-known game; the objective is to find traps on a rectangular board without triggering them",
   "main": "index.js",
   "scripts": {
