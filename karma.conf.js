@@ -1,6 +1,6 @@
 /* global module, require */
 
-const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('./webpack.dev.js');
 
 // Karma configuration 
 module.exports = function (config) {
@@ -20,18 +20,16 @@ module.exports = function (config) {
     webpack: {
       mode: webpackConfig.mode,
       module: {
-        rules: [{
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: 'babel-loader'
-        }, {
-          test: /\.jsx?$/,
-          exclude: /node_modules/,
-          use: 'babel-loader'
-        }, {
-          test: /\.scss$/,
-          use: 'null-loader'
-        }]
+        rules: [
+          {
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            use: 'babel-loader'
+          },
+          {
+            test: /\.scss$/,
+            use: 'null-loader'
+          }]
       },
       plugins: webpackConfig.plugins,
       resolve: webpackConfig.resolve
