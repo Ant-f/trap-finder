@@ -80,3 +80,13 @@ body {
     width: 2.5em;
   }
 }
+
+.versionIndicator {
+  @include set-font-family();
+  @include emboss();
+  position: absolute;
+  font-size: 0.7em;
+  right: 0.5em;
+  top: 0.5em;
+  z-index: 4;
+}
