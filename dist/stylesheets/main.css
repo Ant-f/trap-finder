@@ -1,0 +1,213 @@
+body {
+  margin: 0; }
+
+._4y4ltdTU_Ovkj5vYPO_0G {
+  align-items: center;
+  background: #FFFFFF20;
+  border-top: #FFFFFF28;
+  border-top-width: 0.2em;
+  border-top-style: solid;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.1em;
+  position: fixed;
+  width: 100%;
+  z-index: 2; }
+
+._3V4HiQNUxVs4fbrmQagYXN {
+  font-family: 'Share Tech Mono', monospace;
+  color: #FFFFFF80;
+  text-shadow: 0 0 0.4em #00000090;
+  background: #FFFFFF20;
+  border-bottom: #00000028;
+  border-bottom-width: 0.2em;
+  border-bottom-style: solid;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3; }
+
+.jCyoo-VDWfXpf6DQ_4aNq {
+  align-items: center;
+  background-image: url(/dist/images/55487a8b73f1910a2bc77b6f22e999f3.jpg);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  z-index: 1; }
+  .jCyoo-VDWfXpf6DQ_4aNq h1, .jCyoo-VDWfXpf6DQ_4aNq a {
+    font-family: 'Share Tech Mono', monospace;
+    color: #FFFFFF80;
+    text-shadow: 0 0 0.4em #00000090;
+    margin: 0; }
+  .jCyoo-VDWfXpf6DQ_4aNq a {
+    margin: 0.2em 0; }
+
+._3Cfl_4MEJXpmNK3HFsAnJM {
+  align-items: center;
+  background: #2c2c2c;
+  border-color: #424242;
+  border-radius: 4%;
+  border-style: inset;
+  border-width: 0.4em;
+  display: flex;
+  margin-right: 0.2em;
+  padding: 0.2em 0.5em; }
+
+._3mTOjoXbB9ACWh3isnUAPI {
+  align-items: center;
+  display: flex; }
+  ._3mTOjoXbB9ACWh3isnUAPI img {
+    width: 2.5em; }
+
+._2JuLC67sfPYpNEQS-of2mH {
+  font-family: 'Share Tech Mono', monospace;
+  color: #FFFFFF80;
+  text-shadow: 0 0 0.4em #00000090;
+  position: absolute;
+  font-size: 0.7em;
+  right: 0.5em;
+  top: 0.5em;
+  z-index: 4; }
+
+._2hcmRVEv1TWG3L9o5W0OBq {
+  background: white;
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: 100%;
+  height: 100%; }
+
+._1406YutI8Zi3cVhAz3EQ1 {
+  align-items: center;
+  border: 0.05em solid #FFFFFF60;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 0.2em;
+  margin-right: 0.5em;
+  height: 3em;
+  width: 3em; }
+  ._1406YutI8Zi3cVhAz3EQ1 input:checked + div {
+    opacity: 0.25; }
+  ._1406YutI8Zi3cVhAz3EQ1 img {
+    position: absolute; }
+  ._1406YutI8Zi3cVhAz3EQ1 input {
+    display: none; }
+
+.PCMHMPj4y4tEPa0k7HVEG {
+  padding: 1.5em; }
+
+._3rKWssF0hGDF2_YrbiXFk3 {
+  margin-right: 0.2em; }
+
+._3PvOyuyHO363QnHj3lwWW2 {
+  margin-right: 2em;
+  text-align: center;
+  width: 4em; }
+
+._126qPROLJIUimi8F9SXZJ9 {
+  opacity: 0.3; }
+
+._1fIPAYMdXDO6y5mwEKAdsG {
+  transition: opacity 0.2s; }
+
+._2aBoaYStPVyDhF2XciqZp3 {
+  align-items: center;
+  display: flex;
+  height: 2.2em;
+  justify-content: center;
+  position: relative;
+  width: 2.2em; }
+  ._2aBoaYStPVyDhF2XciqZp3 img {
+    position: absolute;
+    height: 1.76em;
+    transition: opacity 0.1s; }
+
+.lwqNs8asBTQ1mf5o97d_J {
+  opacity: 0; }
+
+._30lOycR3IHC26Fhy4Xv4vw {
+  font-family: 'Share Tech Mono', monospace;
+  color: cornflowerblue;
+  font-size: 1.5em;
+  margin: 0 0.2em; }
+
+._3G5rcD9rR9hUhQN90fGiOd {
+  align-items: center;
+  border: 0.1em inset lightgray;
+  display: flex;
+  justify-content: center;
+  height: 4em;
+  width: 4em; }
+
+.WMsKY5S-1nZTq-cIAwzgM {
+  position: absolute;
+  background: white;
+  height: 4em;
+  opacity: 0;
+  transition: opacity 0.1s;
+  width: 4em; }
+  .WMsKY5S-1nZTq-cIAwzgM:hover {
+    opacity: 0.4; }
+
+._1R4qyLtYXjN-BWZG88HWKy {
+  display: flex; }
+
+._2gU42hDzWkH6IbYo87KAkX {
+  opacity: 0.2; }
+
+.RTTnaNXUQDtISuX7xt1RZ {
+  background: #a4c3fd; }
+
+._3CMaVvpF8o7hifbnEWXGxl {
+  width: 4em; }
+
+._2WN_2M9yD8sa1Lz0yp31UJ {
+  position: absolute; }
+
+.gOF2fdJWM10GX26-K8_4q {
+  background: #a5ff89; }
+
+._39IUHYFR55SmL6VEVFjPTw {
+  width: 1.5em; }
+
+._3Sd3u9jTJlZcpkdPQRIbGu {
+  background: #ffc5c5; }
+
+._73aBrVNf96Sk71BZySZ9D {
+  font-size: 1.6em;
+  font-weight: bold; }
+
+._2QpHK-OEsuOzy1VJ-6KjPu {
+  background: #dfdfdf; }
+
+.KovWlypleN9p1iptkRioa {
+  color: cornflowerblue; }
+
+._2jxBgCWzUlsgSUpVk59skE {
+  color: green; }
+
+.Tz74Us27aDOk7q-vnZVHg {
+  color: #ff002b; }
+
+._3048-cXVgMD37sFcYYA-Rp {
+  color: purple; }
+
+._1Mqd0su0cpfBpPdDOjiNFA {
+  color: maroon; }
+
+._2slBFUAgM5DIjtOzl92mTi {
+  color: turquoise; }
+
+._3kdO5HELRmWqIagleT0i4d {
+  color: black; }
+
+.qLttyPaKtIdwjzRcV872R {
+  color: gray; }
+
