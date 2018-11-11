@@ -3,7 +3,7 @@
 import { expect } from 'chai';
 import * as React from 'react';
 import Enzyme from '../root-hooks.spec.js';
-import ContentRoot from '../../src/components/content-root.jsx';
+import ContentRoot from '../../src/components/content-root';
 
 describe('<ContentRoot />', function () {
   it('Contains all components', function () {
@@ -22,9 +22,9 @@ describe('<ContentRoot />', function () {
       versionIndicator: 'versionIndicator'
     };
 
-    const ContentRootWithInjection = require('inject-loader!../../src/components/content-root.jsx')({
+    const ContentRootWithInjection = require('inject-loader!../../src/components/content-root')({
       '../../package.json': { version: '1.2.3' },
-      '../../stylesheets/content-root.scss': styles
+      '../../stylesheets/content-root': styles
     }).default;
 
     const wrapper = Enzyme.shallow(<ContentRootWithInjection />);

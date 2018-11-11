@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import RemainingTraps from '../components/remaining-traps.jsx';
+import RemainingTraps from '../components/remaining-traps';
 
 export const mapStateToProps = state => {
   const boardCells = state.get('board').flatten(1);

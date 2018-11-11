@@ -14,9 +14,12 @@ const styles = {
   unrevealed: 'unrevealed'
 };
 
-const GridCell = require('inject-loader!../../src/components/grid-cell.jsx')({
-  '../../stylesheets/trap-grid.scss': styles,
-  '../../stylesheets/trap-count-colours.scss': styles
+const GridCell = require('inject-loader!../../src/components/grid-cell')({
+  '../../stylesheets/trap-grid': styles,
+  '../../stylesheets/trap-count-colours': styles,
+  '../../images/bear-trap': 'bear-trap',
+  '../../images/red-cross': 'red-cross',
+  '../../images/red-flag': 'red-flag',
 }).default;
 
 const getWrapper = props => {
@@ -48,8 +51,8 @@ describe('<GridCell/>', function () {
     toggleFlag: () => { }
   };
 
-  const crossSelector = 'img[src="images/red-cross.svg"]';
-  const flagSelector = 'img[src="images/red-flag.svg"]';
+  const crossSelector = 'img[src="red-cross"]';
+  const flagSelector = 'img[src="red-flag"]';
 
   it('Shows a flag if flagged', function () {
     const wrapper = getWrapper({ ...props, isFlagged: true });
@@ -109,7 +112,7 @@ describe('<GridCell/>', function () {
       props = { ...props, isGameLost: true };
     });
 
-    const trapSelector = 'img[src="images/bear-trap.svg"]';
+    const trapSelector = 'img[src="bear-trap"]';
     
     it('Shows trap when present', function () {
       const wrapper = getWrapper({ ...props, isTrap: true });

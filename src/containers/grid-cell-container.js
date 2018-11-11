@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions/action-creators';
 import * as inputModes from '../input-modes';
-import GridCell from '../components/grid-cell.jsx';
+import GridCell from '../components/grid-cell';
 
 export const mapDispatchToProps = dispatch => {
   return {

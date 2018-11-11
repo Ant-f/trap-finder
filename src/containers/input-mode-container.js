@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { updateInputMode } from '../actions/action-creators';
 import * as inputModes from '../input-modes';
-import InputMode from '../components/input-mode.jsx';
+import InputMode from '../components/input-mode';
 
 export const mapDispatchToProps = dispatch => {
   return bindActionCreators({ updateInputMode }, dispatch);

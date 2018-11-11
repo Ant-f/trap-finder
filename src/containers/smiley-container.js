@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions/action-creators';
-import Smiley from '../components/smiley.jsx';
+import Smiley from '../components/smiley';
 
 export const mapDispatchToProps = dispatch => {
   return {

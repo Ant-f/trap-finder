@@ -22,12 +22,16 @@ module.exports = function (config) {
       module: {
         rules: [
           {
-            test: /\.jsx?$/,
+            test: /\.jsx?$/i,
             exclude: /node_modules/,
             use: 'babel-loader'
           },
           {
-            test: /\.scss$/,
+            test: /\.scss$/i,
+            use: 'null-loader'
+          },
+          {
+            test: /\.svg$/i,
             use: 'null-loader'
           }]
       },

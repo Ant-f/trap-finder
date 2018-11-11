@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as styles from '../../stylesheets/trap-grid.scss';
+import * as styles from '../../stylesheets/trap-grid';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
 import GridCell from '../containers/grid-cell-container';

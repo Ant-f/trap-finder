@@ -1,7 +1,10 @@
 import * as React from 'react';
-import * as styles from '../../stylesheets/trap-grid.scss';
-import * as colours from '../../stylesheets/trap-count-colours.scss';
+import * as styles from '../../stylesheets/trap-grid';
+import * as colours from '../../stylesheets/trap-count-colours';
+import bearTrap from '../../images/bear-trap';
 import PropTypes from 'prop-types';
+import redCross from '../../images/red-cross';
+import redFlag from '../../images/red-flag';
 
 const colourNames = {
   1: 'one',
@@ -64,10 +67,11 @@ const GridCell = ({ adjacentTrapCount, isFlagInput, isFlagged, isGameLost, isGam
     {
       isTrap
         ? isGameLost
-          ? <img className={`
-            ${isFlagged ? styles.faded : null}
-            ${styles.image}`}
-          src="images/bear-trap.svg" />
+          ? <img
+            className={`
+              ${isFlagged ? styles.faded : null}
+              ${styles.image}`}
+            src={bearTrap} />
           : null
         : isRevealed && adjacentTrapCount > 0
           ? <div className={`
@@ -84,7 +88,7 @@ const GridCell = ({ adjacentTrapCount, isFlagInput, isFlagged, isGameLost, isGam
             ${isGameLost && !isTrap ? styles.faded : null}
             ${styles.image}
             ${styles.imageOverlay}`}
-          src="images/red-flag.svg" />
+          src={redFlag} />
         : null
     }
     {
@@ -93,7 +97,7 @@ const GridCell = ({ adjacentTrapCount, isFlagInput, isFlagged, isGameLost, isGam
           className={`
             ${styles.imageOverlay}
             ${styles.smallImage}`}
-          src="images/red-cross.svg" />
+          src={redCross} />
         : null
     }
     <div className={styles.cellHighlight} />

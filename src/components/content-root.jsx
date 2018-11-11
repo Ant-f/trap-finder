@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as styles from '../../stylesheets/content-root.scss';
+import * as styles from '../../stylesheets/content-root';
 import { version } from '../../package.json';
 import InputMode from '../containers/input-mode-container';
 import NewGame from '../containers/new-game-container';

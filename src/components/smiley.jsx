@@ -1,26 +1,31 @@
 import * as React from 'react';
-import * as styles from '../../stylesheets/smiley.scss';
+import * as styles from '../../stylesheets/smiley';
+import loseFace from '../../images/lose-face';
+import neutralFace from '../../images/neutral-face';
 import PropTypes from 'prop-types';
+import smileyBase from '../../images/smiley-base';
+import suspenseFace from '../../images/suspense-face';
+import winFace from '../../images/win-face';
 
 const Smiley = ({ isGameLost, isGameWon, isRevealingCell }) => (
   <div className={styles.container}>
-    <img src="images/smiley-base.svg" />
+    <img src={smileyBase} />
       
     <img
       className={`${isRevealingCell || isGameLost || isGameWon ? styles.hidden : null}`}
-      src="images/neutral-face.svg" />
+      src={neutralFace} />
       
     <img
       className={`${!isRevealingCell || isGameLost || isGameWon ? styles.hidden : null}`}
-      src="images/suspense-face.svg" />
+      src={suspenseFace} />
       
     <img
       className={`${isGameWon ? null : styles.hidden}`}
-      src="images/win-face.svg" />
+      src={winFace} />
       
     <img
       className={`${isGameLost ? null : styles.hidden}`}
-      src="images/lose-face.svg" />
+      src={loseFace} />
   </div>);
 
 Smiley.propTypes = {

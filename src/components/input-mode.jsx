@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as inputModes from '../input-modes';
-import * as styles from '../../stylesheets/input-mode.scss';
+import * as styles from '../../stylesheets/input-mode';
 import PropTypes from 'prop-types';
+import redFlag from '../../images/red-flag';
 
 const updateMode = (e, updateInputMode) => {
   const value = e.target.checked
@@ -23,7 +24,7 @@ const InputMode = ({ isFlagInput, updateInputMode }) => (
     
     <div className={styles.activeIndicator} />
     
-    <img src="../../images/red-flag.svg" />
+    <img src={redFlag} />
   </label>);
 
 InputMode.propTypes = {
