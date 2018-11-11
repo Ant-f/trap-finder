@@ -1,5 +1,6 @@
 import * as React from 'react';
-import * as styles from '../../stylesheets/remaining-traps.scss';
+import * as styles from '../../stylesheets/remaining-traps';
+import bearTrap from '../../images/bear-trap';
 import PropTypes from 'prop-types';
 
 const RemainingTraps = ({ totalTrapCount, flaggedTrapCount }) => (
@@ -11,7 +12,7 @@ const RemainingTraps = ({ totalTrapCount, flaggedTrapCount }) => (
             ${i < flaggedTrapCount ? null : styles.faded}
             ${styles.image}`}
           key={i}
-          src="images/bear-trap.svg" />;
+          src={bearTrap} />;
       })
     }
   </div>);

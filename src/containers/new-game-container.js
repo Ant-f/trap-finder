@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions/action-creators';
-import NewGame from '../components/new-game.jsx';
+import NewGame from '../components/new-game';
 
 export const mapDispatchToProps = dispatch => {
   return {

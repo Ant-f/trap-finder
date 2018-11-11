@@ -4,17 +4,21 @@ import * as React from 'react';
 import { expect } from 'chai';
 import Enzyme from '../root-hooks.spec.js';
 
-const loseSelector = 'img[src="images/lose-face.svg"]';
-const neutralSelector = 'img[src="images/neutral-face.svg"]';
-const suspenseSelector = 'img[src="images/suspense-face.svg"]';
-const winSelector = 'img[src="images/win-face.svg"]';
+const loseSelector = 'img[src="lose-face"]';
+const neutralSelector = 'img[src="neutral-face"]';
+const suspenseSelector = 'img[src="suspense-face"]';
+const winSelector = 'img[src="win-face"]';
 
 const styles = {
   hidden: 'hidden'
 };
 
-const Smiley = require('inject-loader!../../src/components/smiley.jsx')({
-  '../../stylesheets/smiley.scss': styles
+const Smiley = require('inject-loader!../../src/components/smiley')({
+  '../../stylesheets/smiley': styles,
+  '../../images/lose-face': 'lose-face',
+  '../../images/neutral-face': 'neutral-face',
+  '../../images/suspense-face': 'suspense-face',
+  '../../images/win-face': 'win-face'
 }).default;
 
 const getWrapper = props => {

@@ -8,12 +8,13 @@ const styles = {
   faded: 'faded'
 };
 
-const RemainingTraps = require('inject-loader!../../src/components/remaining-traps.jsx')({
-  '../../stylesheets/remaining-traps.scss': styles
+const RemainingTraps = require('inject-loader!../../src/components/remaining-traps')({
+  '../../stylesheets/remaining-traps': styles,
+  '../../images/bear-trap': 'bear-trap'
 }).default;
 
 describe('<RemainingTraps />', function () {
-  const imageSelector = 'img[src="images/bear-trap.svg"]';
+  const imageSelector = 'img[src="bear-trap"]';
 
   it('Displays the correct number of traps', function () {
     const wrapper = Enzyme.shallow(

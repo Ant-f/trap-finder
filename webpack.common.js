@@ -3,8 +3,8 @@
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = function (cssLoaderOptions) {
-  const combinedCssLoaderOptions = merge(cssLoaderOptions, {
+module.exports = function (options) {
+  const combinedCssLoaderOptions = merge(options.cssLoaderOptions, {
     camelCase: true,
     modules: true
   });
@@ -15,12 +15,12 @@ module.exports = function (cssLoaderOptions) {
     module: {
       rules: [
         {
-          test: /\.jsx?$/,
+          test: /\.jsx?$/i,
           exclude: /node_modules/,
           use: 'babel-loader'
         },
         {
-          test: /\.scss$/,
+          test: /\.scss$/i,
           use: [
             {
               loader: MiniCssExtractPlugin.loader
@@ -43,8 +43,8 @@ module.exports = function (cssLoaderOptions) {
             {
               loader: 'file-loader',
               options: {
-                name: '[hash].[ext]',
-                outputPath: 'images/'
+                name: '[path][hash].[ext]',
+                publicPath: options.imageLoaderPublicPath
               }
             },
             {
@@ -68,7 +68,7 @@ module.exports = function (cssLoaderOptions) {
     ],
 
     resolve: {
-      extensions: ['jsx', '.js']
+      extensions: ['.jsx', '.js', '.scss', '.svg']
     }
   };
 };

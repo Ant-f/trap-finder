@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as styles from '../../stylesheets/new-game.scss';
+import * as styles from '../../stylesheets/new-game';
 import PropTypes from 'prop-types';
 
 class NewGame extends React.PureComponent {

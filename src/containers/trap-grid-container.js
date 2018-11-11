@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { revealCellAt, toggleFlagAt } from '../actions/action-creators';
-import TrapGrid from '../components/trap-grid.jsx';
+import TrapGrid from '../components/trap-grid';
 
 export const mapDispatchToProps = dispatch => {
   return bindActionCreators(

@@ -4,7 +4,7 @@ import * as React from 'react';
 import chai, { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import Enzyme from '../root-hooks.spec.js';
-import NewGame from '../../src/components/new-game.jsx';
+import NewGame from '../../src/components/new-game';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 

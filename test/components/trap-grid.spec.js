@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { fromJS } from 'immutable';
 import * as React from 'react';
 import Enzyme from '../root-hooks.spec.js';
-import TrapGrid from '../../src/components/trap-grid.jsx';
+import TrapGrid from '../../src/components/trap-grid';
 
 const cell = () => ({
   adjacentTrapCount: 0,

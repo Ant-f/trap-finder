@@ -5,7 +5,7 @@ import chai, { expect } from 'chai';
 import Enzyme from '../root-hooks.spec.js';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import Timer from '../../src/components/timer.jsx';
+import Timer from '../../src/components/timer';
 import * as timerStates from '../../src/components/timer-states';
 
 chai.use(sinonChai);
@@ -18,7 +18,7 @@ const getTimer = (elapsedTimeIntervals) => {
     times.push(newTime);
   }
 
-  const TimerWithInjection = require('inject-loader!../../src/components/timer.jsx')({
+  const TimerWithInjection = require('inject-loader!../../src/components/timer')({
     '../helpers/time-provider': () => times.shift()
   }).default;
 
